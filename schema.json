@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Operator3PaneCockpitDocument",
+  "type": "object",
+  "required": ["metadata", "columns", "items"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "metadata": {
+      "type": "object",
+      "required": ["title", "document_id"],
+      "properties": {
+        "title": { "type": "string" },
+        "document_id": { "type": "string" },
+        "created_at": { "type": "string" },
+        "source_file": { "type": "string" }
+      }
+    },
+    "columns": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["key", "title"],
+        "properties": {
+          "key": { "type": "string" },
+          "title": { "type": "string" },
+          "width_weight": { "type": "number" }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "col1", "col2", "col3"],
+        "properties": {
+          "id": { "type": "string" },
+          "col1": { "type": "string" },
+          "col2": { "type": "string" },
+          "col3": { "type": "string" }
+        }
+      }
+    }
+  }
+}

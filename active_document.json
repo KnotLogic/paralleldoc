@@ -1,0 +1,46 @@
+{
+  "$schema": "https://antigravity.local/schemas/cockpit-v1.json",
+  "metadata": {
+    "title": "Sample: Cloud Infrastructure SLA & Security Compliance Review",
+    "document_id": "DOC-2026-SEC-SLA-001",
+    "created_at": "2026-09-04T12:00:00Z",
+    "source_file": "cloud_sla_security_specification.docx"
+  },
+  "columns": [
+    { "key": "col1", "title": "Original Clause (EN)", "width_weight": 30 },
+    { "key": "col2", "title": "Target Translation (UA)", "width_weight": 30 },
+    { "key": "col3", "title": "Engineering & Risk Assessment (EN)", "width_weight": 40 }
+  ],
+  "items": [
+    {
+      "id": "1",
+      "col1": "1. High Availability and Uptime: The Contractor guarantees monthly service availability of at least 99.95%, excluding scheduled maintenance windows announced at least 48 hours in advance. Failure to meet this SLA incurs a 10% penalty credit per hour of downtime.",
+      "col2": "1. Висока доступність та безвідмовна робота: Виконавець гарантує доступність сервісу не менше 99.95% на місяць, за винятком планових регламентних робіт, анонсованих щонайменше за 48 годин. Порушення SLA тягне за собою штрафний кредит у розмірі 10% за кожну годину простою.",
+      "col3": "✅ **Compliance & Architecture Feasibility:**\n\n- Multi-AZ architecture satisfies the target 99.95% SLA (historical uptime: 99.99%).\n- Automated failover MTTR is under 45 seconds.\n- **Risk:** Low. Automated health monitoring via CloudWatch/Prometheus required."
+    },
+    {
+      "id": "2",
+      "col1": "2. Cryptographic Controls and Encryption: All customer data at rest must be encrypted using AES-256-GCM. All data in transit across public networks must enforce TLS 1.3 with forward secrecy. Deprecated ciphers (including RSA key exchange and CBC suites) are strictly prohibited.",
+      "col2": "2. Криптографічний захист та шифрування: Усі дані клієнтів у стані спокою повинні шифруватися за стандартом AES-256-GCM. Передача даних через публічні мережі зобов'язана використовувати протокол TLS 1.3 із гарантією прямої секретності (PFS). Застарілі шифри (включаючи RSA key exchange та CBC) суворо заборонені.",
+      "col3": "🔒 **Security Standards Alignment:**\n\n- Databases enforce hardware disk encryption with KMS key rotation every 90 days.\n- Ingress controller forcibly rejects client sessions below TLS 1.3.\n- Zero-plaintext storage policy is codified in the architecture specification."
+    },
+    {
+      "id": "3",
+      "col1": "3. Incident Notification and Escalation Window: In the event of a suspected or confirmed security breach, the Contractor shall notify the Client's CISO within 24 hours of first detection and provide an initial RCA report within 72 hours.",
+      "col2": "3. Регламент сповіщення про інциденти: У разі підозри або підтвердження витоку даних Виконавець зобов'язаний повідомити CISO Замовника протягом 24 годин з моменту першого виявлення та надати первинний звіт про аналіз першопричин (RCA) протягом 72 годин.",
+      "col3": "⚡ **Operational Readiness:**\n\n- 24/7/365 SOC coverage with internal response objective (MTTA) <= 15 minutes.\n- 24-hour escalation requirement is met with substantial buffer.\n- Integrated with PagerDuty and automated incident playbooks."
+    },
+    {
+      "id": "4",
+      "col1": "4. Intellectual Property and Licensing Rights: All custom automation scripts, infrastructure-as-code manifests, and integration connectors developed specifically under this SOW shall remain the exclusive intellectual property of the Client upon final milestone acceptance.",
+      "col2": "4. Інтелектуальна власність та ліцензійні права: Усі спеціалізовані скрипти автоматизації, маніфести інфраструктури як коду (IaC) та інтеграційні модулі, розроблені в рамках цього ТЗ, переходять у виключну власність Замовника після остаточного приймання етапу.",
+      "col3": "📄 **Licensing Review:**\n\n- Proprietary platform libraries are delivered under permissive MIT / Apache 2.0 terms.\n- Client-specific code is isolated in a dedicated repository.\n- Zero patent or licensing conflicts identified."
+    },
+    {
+      "id": "5",
+      "col1": "5. Independent Audit and Verification: The Client reserves the right to conduct an annual third-party SOC 2 Type II or ISO/IEC 27001 compliance assessment. The Contractor shall facilitate log access and evidence inspection without undue delay.",
+      "col2": "5. Незалежний аудит та верифікація: Замовник залишає за собою право проводити щорічний незалежний аудит на відповідність стандартам SOC 2 Type II або ISO/IEC 27001. Виконавець зобов'язується своєчасно надати аудиторам доступ до журналів та доказової бази.",
+      "col3": "🛡️ **Audit Preparedness:**\n\n- Annual SOC 2 Type II assessment is completed and maintained by an accredited independent auditor.\n- Immutable Audit Logs are stored in tamper-proof S3 WORM storage with deletion locks.\n- Routine compliance review proceeds without operational friction."
+    }
+  ]
+}

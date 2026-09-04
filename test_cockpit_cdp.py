@@ -1,0 +1,312 @@
+import subprocess
+import time
+import urllib.request
+import json
+import asyncio
+import sys
+import os
+import tempfile
+import hashlib
+from pathlib import Path
+import websockets
+
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+
+def find_browser_executable():
+    env = os.environ
+    candidates = [
+        Path(env.get("LOCALAPPDATA", "")) / "BraveSoftware" / "Brave-Browser" / "Application" / "brave.exe",
+        Path(env.get("ProgramFiles", "")) / "BraveSoftware" / "Brave-Browser" / "Application" / "brave.exe",
+        Path(env.get("ProgramFiles(x86)", "")) / "BraveSoftware" / "Brave-Browser" / "Application" / "brave.exe",
+        Path(env.get("ProgramFiles(x86)", "")) / "Microsoft" / "Edge" / "Application" / "msedge.exe",
+        Path(env.get("ProgramFiles", "")) / "Microsoft" / "Edge" / "Application" / "msedge.exe",
+        Path(env.get("LOCALAPPDATA", "")) / "Microsoft" / "Edge" / "Application" / "msedge.exe",
+        Path(env.get("ProgramFiles", "")) / "Google" / "Chrome" / "Application" / "chrome.exe",
+        Path(env.get("ProgramFiles(x86)", "")) / "Google" / "Chrome" / "Application" / "chrome.exe",
+    ]
+    for c in candidates:
+        if c.is_file():
+            return str(c)
+    raise RuntimeError("No compatible Chromium browser found (Brave, Edge, or Chrome)")
+
+BROWSER_PATH = find_browser_executable()
+HTML_PATH = Path(__file__).resolve().parent / "paralleldoc.html"
+HTML_URL = HTML_PATH.as_uri()
+PROFILE_DIR = str(Path(tempfile.gettempdir()) / "paralleldoc_cdp_test_profile")
+
+class CDPClient:
+    def __init__(self, port=9232):
+        self.port = port
+        self.proc = None
+        self.ws = None
+        self.msg_id = 0
+
+    def start(self):
+        self.proc = subprocess.Popen([
+            BROWSER_PATH,
+            "--headless=new",
+            f"--remote-debugging-port={self.port}",
+            f"--user-data-dir={PROFILE_DIR}",
+            "--disable-gpu",
+            "--allow-file-access-from-files",
+            HTML_URL
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(2)
+
+    async def connect(self):
+        for _ in range(10):
+            try:
+                with urllib.request.urlopen(f"http://127.0.0.1:{self.port}/json") as r:
+                    pages = json.loads(r.read().decode())
+                    if pages:
+                        ws_url = pages[0]["webSocketDebuggerUrl"]
+                        self.ws = await websockets.connect(ws_url)
+                        return
+            except Exception:
+                await asyncio.sleep(0.5)
+        raise RuntimeError("Could not connect to browser CDP")
+
+    async def eval_js(self, expression, await_promise=False):
+        self.msg_id += 1
+        req = {
+            "id": self.msg_id,
+            "method": "Runtime.evaluate",
+            "params": {
+                "expression": expression,
+                "returnByValue": True,
+                "awaitPromise": await_promise
+            }
+        }
+        await self.ws.send(json.dumps(req))
+        while True:
+            resp_raw = await self.ws.recv()
+            resp = json.loads(resp_raw)
+            if resp.get("id") == self.msg_id:
+                result = resp.get("result", {})
+                if "exceptionDetails" in result:
+                    raise RuntimeError(f"JS Exception: {result['exceptionDetails']}")
+                return result.get("result", {}).get("value")
+
+    async def close(self):
+        if self.ws:
+            await self.ws.close()
+        if self.proc:
+            self.proc.terminate()
+            try:
+                self.proc.wait(timeout=3)
+            except Exception:
+                self.proc.kill()
+
+async def run_tests():
+    client = CDPClient()
+    client.start()
+    try:
+        await client.connect()
+        print(f"Connected to headless browser via CDP ({Path(BROWSER_PATH).name}).")
+
+        # Test 1: Document title and basic metadata
+        title = await client.eval_js("document.title")
+        print(f"Test 1 - Title: {title}")
+        assert "ParallelDoc" in title
+
+        # Test 2: Full SHA-256 visibly displayed on screen (Anti-Drift Header requirement)
+        hash_text = await client.eval_js("document.getElementById('hashText').textContent")
+        print(f"Test 2 - Visible Hash text: {hash_text}")
+
+        full_hash = await client.eval_js("currentFullHash")
+        print(f"Test 2 - Internal Full hash: {full_hash}")
+
+        # Compute expected hash from active_document.json / sample_document.json
+        sample_file = Path(__file__).resolve().parent / "sample_document.json"
+        normalized_bytes = sample_file.read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")
+        EXPECTED_HASH = hashlib.sha256(normalized_bytes).hexdigest()
+
+        assert full_hash == EXPECTED_HASH, f"Expected {EXPECTED_HASH}, got {full_hash}"
+        assert hash_text == EXPECTED_HASH, f"Expected visible hashText {EXPECTED_HASH}, got {hash_text}"
+        assert len(hash_text) == 64, f"Hash text must be full 64 characters, got {len(hash_text)}"
+        print(f"✅ Test 2 Passed: Full 64-char SHA-256 is visibly rendered in DOM: {EXPECTED_HASH}")
+
+        # Test 3: Rows rendering
+        row_count = await client.eval_js("document.querySelectorAll('.doc-row').length")
+        print(f"Test 3 - Row count: {row_count}")
+        assert row_count == 5
+
+        # Test 4: Markdown list grouping
+        ul_count = await client.eval_js("document.querySelectorAll('#row-1 .col3 ul').length")
+        li_count = await client.eval_js("document.querySelectorAll('#row-1 .col3 li').length")
+        print(f"Test 4 - col3 <ul> count: {ul_count}, <li> count: {li_count}")
+        assert ul_count == 1, f"Expected 1 <ul>, got {ul_count}"
+        assert li_count == 3, f"Expected 3 <li>, got {li_count}"
+        print("✅ Test 4 Passed: Markdown lists are cleanly grouped into a single <ul>")
+
+        # Test 5: Marker creation (Yellow highlight)
+        js_select = """
+        (() => {
+            const el = document.querySelector('#row-1 .col1 p');
+            const range = document.createRange();
+            range.setStart(el.firstChild, 0);
+            range.setEnd(el.firstChild, 10);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            return sel.toString();
+        })()
+        """
+        selected_text = await client.eval_js(js_select)
+        print(f"Test 5 - Selected text: '{selected_text}'")
+
+        # Apply yellow highlight
+        await client.eval_js("applyHighlight('hl-yellow')")
+        mark_count = await client.eval_js("document.querySelectorAll('mark.hl-yellow').length")
+        mark_text = await client.eval_js("document.querySelector('mark.hl-yellow')?.textContent")
+        print(f"Test 5 - Mark count: {mark_count}, Mark text: '{mark_text}'")
+        assert mark_count == 1
+
+        # Test 6: Click on mark to remove it (Direct click clearing)
+        js_click_mark = """
+        (() => {
+            const mark = document.querySelector('mark.hl-yellow');
+            if (!mark) return false;
+            window.getSelection().removeAllRanges();
+            const evt = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+            mark.dispatchEvent(evt);
+            return true;
+        })()
+        """
+        clicked = await client.eval_js(js_click_mark)
+        mark_count_after_click = await client.eval_js("document.querySelectorAll('mark.hl-yellow').length")
+        print(f"Test 6 - Direct click mark removed: {mark_count_after_click == 0} (count: {mark_count_after_click})")
+        assert mark_count_after_click == 0
+        print("✅ Test 6 Passed: Direct click on <mark> unwraps it")
+
+        # Test 7: Selection clearing with btnHlClear
+        await client.eval_js("""
+        (() => {
+            const el = document.querySelector('#row-1 .col1 p');
+            const range = document.createRange();
+            range.setStart(el.firstChild, 0);
+            range.setEnd(el.firstChild, 10);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            applyHighlight('hl-red');
+        })()
+        """)
+        mark_red_count = await client.eval_js("document.querySelectorAll('mark.hl-red').length")
+        assert mark_red_count == 1
+
+        js_clear_selection = """
+        (() => {
+            const row = document.querySelector('#row-1 .col1 p');
+            const range = document.createRange();
+            range.selectNodeContents(row);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+
+            clearSelectedHighlights();
+            return document.querySelectorAll('mark').length;
+        })()
+        """
+        remaining_marks = await client.eval_js(js_clear_selection)
+        print(f"Test 7 - Remaining marks after clearSelectedHighlights: {remaining_marks}")
+        assert remaining_marks == 0
+        print("✅ Test 7 Passed: clearSelectedHighlights unwraps all marks in selection")
+
+        # Test 8: Protection against cross-column / cross-cell selection
+        js_cross_col = """
+        (() => {
+            const row1 = document.querySelector('#row-1');
+            const col1 = row1.querySelector('.col1 p');
+            const col2 = row1.querySelector('.col2 p');
+            const range = document.createRange();
+            range.setStart(col1.firstChild, 0);
+            range.setEnd(col2.firstChild, 10);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+
+            // Attempt to highlight across columns
+            applyHighlight('hl-yellow');
+
+            const gridChildren = row1.querySelector('.row-grid').children.length;
+            const marks = row1.querySelectorAll('mark').length;
+            return { gridChildren, marks };
+        })()
+        """
+        cross_res = await client.eval_js(js_cross_col)
+        print(f"Test 8 - Cross-column protection result: {cross_res}")
+        assert cross_res['gridChildren'] == 3, f"Grid children corrupted! Count: {cross_res['gridChildren']}"
+        assert cross_res['marks'] == 0, f"Cross-col mark should be rejected! Marks: {cross_res['marks']}"
+        print("✅ Test 8 Passed: Cross-cell selection is rejected, grid layout preserved at exactly 3 columns")
+
+        # Test 9: Search and scroll
+        js_search = """
+        (() => {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = 'AES-256';
+            handleSearch(true);
+            return {
+                matches: searchMatches.length,
+                displayedRows: Array.from(document.querySelectorAll('.doc-row')).filter(r => r.style.display !== 'none').length
+            };
+        })()
+        """
+        search_res = await client.eval_js(js_search)
+        print(f"Test 9 - Search 'AES-256': {search_res}")
+        assert search_res['matches'] == 1
+        assert search_res['displayedRows'] == 1
+
+        # Test 10: Enter key navigation in search
+        js_enter = """
+        (() => {
+            const searchInput = document.getElementById('searchInput');
+            const evt = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
+            searchInput.dispatchEvent(evt);
+            return currentMatchIndex;
+        })()
+        """
+        match_idx = await client.eval_js(js_enter)
+        print(f"Test 10 - Match index after Enter: {match_idx}")
+        assert match_idx == 0
+
+        # Test 11: Escape key resets search
+        js_escape = """
+        (() => {
+            const searchInput = document.getElementById('searchInput');
+            const evt = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
+            searchInput.dispatchEvent(evt);
+            return {
+                val: searchInput.value,
+                displayedRows: Array.from(document.querySelectorAll('.doc-row')).filter(r => r.style.display !== 'none').length
+            };
+        })()
+        """
+        esc_res = await client.eval_js(js_escape)
+        print(f"Test 11 - Escape search reset: {esc_res}")
+        assert esc_res['val'] == ''
+        assert esc_res['displayedRows'] == 5
+        print("✅ Test 11 Passed: Search and escape reset work cleanly")
+
+        # Test 12: Clipboard copy handlers don't throw errors
+        js_clipboard = """
+        (() => {
+            // Click hashBadge
+            document.getElementById('hashBadge').click();
+            // Click row badge
+            copyRowId('1');
+            return true;
+        })()
+        """
+        clip_ok = await client.eval_js(js_clipboard)
+        print(f"Test 12 - Clipboard copy executed without errors: {clip_ok}")
+        assert clip_ok == True
+        print("✅ Test 12 Passed: Clipboard copying executed cleanly with robust fallback")
+
+    finally:
+        await client.close()
+
+if __name__ == "__main__":
+    asyncio.run(run_tests())

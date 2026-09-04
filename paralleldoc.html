@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ParallelDoc — 3-Pane Comparative Document Inspector</title>
+  <style>
+    :root {
+      --font-family: Georgia, Cambria, "Times New Roman", serif;
+      --font-size: 16.5px;
+      --line-height: 1.78;
+      --col1-w: 30%;
+      --col2-w: 30%;
+      --col3-w: 40%;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-card: #e2e8f0;
+      --border-card-hover: #3b82f6;
+      --badge-red: #ef4444;
+      --col3-accent: #2563eb;
+      --col3-bg: #f8fafc;
+      --hl-yellow: #fef08a;
+      --hl-red-bg: #fee2e2;
+      --hl-red-border: #ef4444;
+      --header-height: 92px;
+    }
+
+    body, * {
+      -webkit-font-smoothing: subpixel-antialiased !important;
+      -moz-osx-font-smoothing: auto !important;
+      text-rendering: optimizeLegibility !important;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-family);
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      overflow-y: scroll;
+    }
+
+    /* Верхняя фиксированная шапка (Anti-Drift Header V2) */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      padding: 10px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    /* Хэш SHA-256 для скриншотов (Anti-Drift Header V2: полный 64-символьный хэш без усечений) */
+    .hash-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 2px solid #0f172a;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0f172a;
+      cursor: pointer;
+      user-select: all;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .hash-badge:hover {
+      background: #f8fafc;
+      border-color: #2563eb;
+      color: #1d4ed8;
+      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.2);
+    }
+    .hash-badge .hash-icon {
+      font-size: 15px;
+      line-height: 1;
+    }
+    .hash-badge .hash-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #475569;
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+    }
+    .hash-badge strong {
+      color: #0f172a;
+      letter-spacing: 0.03em;
+    }
+    .hash-badge:hover strong {
+      color: #1d4ed8;
+    }
+
+    .doc-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .doc-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .doc-pill {
+      font-size: 12px;
+      font-weight: 600;
+      background: #e2e8f0;
+      color: #475569;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-family: sans-serif;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Кнопки управления */
+    .actions-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #1e293b;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .btn:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .search-input {
+      padding: 6px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      outline: none;
+      width: 190px;
+      transition: width 0.2s, border-color 0.2s;
+    }
+    .search-input:focus {
+      border-color: #3b82f6;
+      width: 250px;
+    }
+
+    /* Настройки чтения (Font Size, Spacing) */
+    .settings-panel {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 12px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #64748b;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 6px;
+    }
+
+    .settings-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-mini {
+      padding: 2px 7px;
+      font-size: 12px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-mini:hover {
+      background: #f1f5f9;
+    }
+    .btn-mini.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+
+    /* Заголовки 3 колонок */
+    .columns-header-bar {
+      position: sticky;
+      top: var(--header-height, 92px);
+      z-index: 90;
+      background: #f8fafc;
+      border-bottom: 2px solid #cbd5e1;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .col-header-spacer {
+      width: 36px;
+      flex-shrink: 0;
+    }
+
+    .col-header-grid {
+      display: grid;
+      grid-template-columns: var(--col1-w) var(--col2-w) var(--col3-w);
+      gap: 24px;
+      flex-grow: 1;
+    }
+
+    .col-header-title {
+      font-size: 14px;
+      font-weight: 700;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .col-header-title.col3-hdr {
+      color: #1d4ed8;
+    }
+
+    /* Основная зона строк (Rows Container) */
+    .content-area {
+      padding: 20px 24px 100px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .doc-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .doc-row:hover {
+      border-color: #93c5fd;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.07);
+    }
+
+    /* Бейдж номера пункта (ShareX Callout Style) */
+    .row-badge {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--badge-red);
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(239, 68, 68, 0.35);
+      margin-top: 2px;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .row-grid {
+      display: grid;
+      grid-template-columns: var(--col1-w) var(--col2-w) var(--col3-w);
+      gap: 24px;
+      flex-grow: 1;
+      align-items: start;
+    }
+
+    .col-cell {
+      min-width: 0;
+      word-break: break-word;
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+    }
+
+    .col-cell p {
+      margin: 0 0 8px 0;
+    }
+    .col-cell p:last-child {
+      margin-bottom: 0;
+    }
+
+    .col-cell ul, .col-cell ol {
+      margin: 4px 0 8px 0;
+      padding-left: 20px;
+    }
+
+    .col-cell strong {
+      color: #0f172a;
+    }
+
+    .col-cell.col3 {
+      background-color: var(--col3-bg);
+      border-left: 3px solid var(--col3-accent);
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* Маркеры выделения (Moon+ Reader style) */
+    mark {
+      cursor: pointer;
+      border-radius: 2px;
+      transition: filter 0.15s ease;
+    }
+    mark:hover {
+      filter: brightness(0.92);
+      outline: 1px dashed rgba(0, 0, 0, 0.4);
+    }
+    mark.hl-yellow {
+      background-color: var(--hl-yellow) !important;
+      color: #1e293b !important;
+      padding: 1px 3px;
+    }
+    mark.hl-red {
+      background-color: var(--hl-red-bg) !important;
+      border-bottom: 2px solid var(--hl-red-border) !important;
+      color: #991b1b !important;
+      padding: 1px 3px;
+    }
+
+    /* Всплывающая панель маркера при выделении текста */
+    #hlTooltip {
+      position: absolute;
+      display: none;
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 4px 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+      z-index: 1000;
+      gap: 5px;
+      align-items: center;
+      user-select: none;
+    }
+
+    .hl-tool-btn {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .hl-tool-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Скрытый input файла */
+    #fileInput {
+      display: none;
+    }
+
+    /* Драг-н-дроп оверлей */
+    #dropOverlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(37, 99, 235, 0.85);
+      color: #ffffff;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      font-family: sans-serif;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    /* Уведомление о копировании */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: sans-serif;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 2000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Оверлей для Drag & Drop -->
+  <div id="dropOverlay">Drop .JSON file here to open</div>
+
+  <!-- Всплывающий маркер (Moon+ Reader Style) -->
+  <div id="hlTooltip">
+    <button class="hl-tool-btn" id="btnHlYellow" title="Yellow highlight">🟡 Highlight</button>
+    <button class="hl-tool-btn" id="btnHlRed" title="Red accent">🔴 Accent</button>
+    <button class="hl-tool-btn" id="btnHlClear" title="Clear highlight">⚪ Clear</button>
+  </div>
+
+  <!-- Всплывающий тост -->
+  <div id="toast"></div>
+
+  <!-- Фиксированная шапка документа (Anti-Drift Header V2) -->
+  <header>
+    <div class="top-bar">
+      <div class="header-left">
+        <!-- Крупный хэш SHA-256 в приоритетной левой зоне для мгновенного считывания на скриншотах -->
+        <div class="hash-badge" id="hashBadge" title="Click to copy full SHA-256 hash">
+          <span class="hash-icon">🔒</span>
+          <span class="hash-label">SHA-256</span>
+          <strong id="hashText">calculating...</strong>
+        </div>
+
+        <div class="doc-meta">
+          <span class="doc-title" id="docTitle">Loading document...</span>
+          <span class="doc-pill" id="docCount">0 clauses</span>
+        </div>
+      </div>
+
+      <div class="actions-bar">
+        <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search clauses (Ctrl+F)..." autocomplete="off">
+        <input type="file" id="fileInput" accept=".json">
+        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">📂 Open JSON</button>
+      </div>
+    </div>
+
+    <!-- Панель настроек чтения (Шрифт, Интервал, Пропорции) -->
+    <div class="settings-panel">
+      <div class="settings-group">
+        <span>Font size:</span>
+        <button class="btn-mini" id="fontDec">A-</button>
+        <span id="fontSizeDisplay" style="font-weight:600; color:#0f172a;">16.5px</span>
+        <button class="btn-mini" id="fontInc">A+</button>
+      </div>
+
+      <div class="settings-group">
+        <span>Line height:</span>
+        <button class="btn-mini" data-lh="1.6">1.6</button>
+        <button class="btn-mini active" data-lh="1.78">1.78</button>
+        <button class="btn-mini" data-lh="1.95">1.95</button>
+      </div>
+
+      <div class="settings-group">
+        <span>Column ratio:</span>
+        <button class="btn-mini active" data-ratio="30-30-40">30 / 30 / 40</button>
+        <button class="btn-mini" data-ratio="33-33-33">33 / 33 / 33</button>
+        <button class="btn-mini" data-ratio="25-25-50">25 / 25 / 50</button>
+      </div>
+
+      <span style="margin-left: auto; font-size: 11px; color: #94a3b8;">Settings saved automatically</span>
+    </div>
+  </header>
+
+  <!-- Заголовки колонок -->
+  <div class="columns-header-bar">
+    <div class="col-header-spacer"></div>
+    <div class="col-header-grid">
+      <div class="col-header-title" id="hdrCol1">Column 1 (Original)</div>
+      <div class="col-header-title" id="hdrCol2">Column 2 (Translation / Revision)</div>
+      <div class="col-header-title col3-hdr" id="hdrCol3">Column 3 (Analysis / Review)</div>
+    </div>
+  </div>
+
+  <!-- Список строк документа -->
+  <main class="content-area" id="rowsContainer">
+    <!-- Строки рендерятся через JS -->
+  </main>
+
+  <!-- Загрузка активного документа без ограничений CORS по протоколу file:/// -->
+  <script src="active_document.js"></script>
+  <script>
+
+    // Default canonical demonstration document (conforms to sample_document.json)
+    const DEFAULT_DOCUMENT_RAW = "{\n  \"$schema\": \"https://antigravity.local/schemas/cockpit-v1.json\",\n  \"metadata\": {\n    \"title\": \"Sample: Cloud Infrastructure SLA & Security Compliance Review\",\n    \"document_id\": \"DOC-2026-SEC-SLA-001\",\n    \"created_at\": \"2026-09-04T12:00:00Z\",\n    \"source_file\": \"cloud_sla_security_specification.docx\"\n  },\n  \"columns\": [\n    { \"key\": \"col1\", \"title\": \"Original Clause (EN)\", \"width_weight\": 30 },\n    { \"key\": \"col2\", \"title\": \"Target Translation (UA)\", \"width_weight\": 30 },\n    { \"key\": \"col3\", \"title\": \"Engineering & Risk Assessment (EN)\", \"width_weight\": 40 }\n  ],\n  \"items\": [\n    {\n      \"id\": \"1\",\n      \"col1\": \"1. High Availability and Uptime: The Contractor guarantees monthly service availability of at least 99.95%, excluding scheduled maintenance windows announced at least 48 hours in advance. Failure to meet this SLA incurs a 10% penalty credit per hour of downtime.\",\n      \"col2\": \"1. \u0412\u0438\u0441\u043e\u043a\u0430 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u0456\u0441\u0442\u044c \u0442\u0430 \u0431\u0435\u0437\u0432\u0456\u0434\u043c\u043e\u0432\u043d\u0430 \u0440\u043e\u0431\u043e\u0442\u0430: \u0412\u0438\u043a\u043e\u043d\u0430\u0432\u0435\u0446\u044c \u0433\u0430\u0440\u0430\u043d\u0442\u0443\u0454 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u0456\u0441\u0442\u044c \u0441\u0435\u0440\u0432\u0456\u0441\u0443 \u043d\u0435 \u043c\u0435\u043d\u0448\u0435 99.95% \u043d\u0430 \u043c\u0456\u0441\u044f\u0446\u044c, \u0437\u0430 \u0432\u0438\u043d\u044f\u0442\u043a\u043e\u043c \u043f\u043b\u0430\u043d\u043e\u0432\u0438\u0445 \u0440\u0435\u0433\u043b\u0430\u043c\u0435\u043d\u0442\u043d\u0438\u0445 \u0440\u043e\u0431\u0456\u0442, \u0430\u043d\u043e\u043d\u0441\u043e\u0432\u0430\u043d\u0438\u0445 \u0449\u043e\u043d\u0430\u0439\u043c\u0435\u043d\u0448\u0435 \u0437\u0430 48 \u0433\u043e\u0434\u0438\u043d. \u041f\u043e\u0440\u0443\u0448\u0435\u043d\u043d\u044f SLA \u0442\u044f\u0433\u043d\u0435 \u0437\u0430 \u0441\u043e\u0431\u043e\u044e \u0448\u0442\u0440\u0430\u0444\u043d\u0438\u0439 \u043a\u0440\u0435\u0434\u0438\u0442 \u0443 \u0440\u043e\u0437\u043c\u0456\u0440\u0456 10% \u0437\u0430 \u043a\u043e\u0436\u043d\u0443 \u0433\u043e\u0434\u0438\u043d\u0443 \u043f\u0440\u043e\u0441\u0442\u043e\u044e.\",\n      \"col3\": \"\u2705 **Compliance & Architecture Feasibility:**\\n\\n- Multi-AZ architecture satisfies the target 99.95% SLA (historical uptime: 99.99%).\\n- Automated failover MTTR is under 45 seconds.\\n- **Risk:** Low. Automated health monitoring via CloudWatch/Prometheus required.\"\n    },\n    {\n      \"id\": \"2\",\n      \"col1\": \"2. Cryptographic Controls and Encryption: All customer data at rest must be encrypted using AES-256-GCM. All data in transit across public networks must enforce TLS 1.3 with forward secrecy. Deprecated ciphers (including RSA key exchange and CBC suites) are strictly prohibited.\",\n      \"col2\": \"2. \u041a\u0440\u0438\u043f\u0442\u043e\u0433\u0440\u0430\u0444\u0456\u0447\u043d\u0438\u0439 \u0437\u0430\u0445\u0438\u0441\u0442 \u0442\u0430 \u0448\u0438\u0444\u0440\u0443\u0432\u0430\u043d\u043d\u044f: \u0423\u0441\u0456 \u0434\u0430\u043d\u0456 \u043a\u043b\u0456\u0454\u043d\u0442\u0456\u0432 \u0443 \u0441\u0442\u0430\u043d\u0456 \u0441\u043f\u043e\u043a\u043e\u044e \u043f\u043e\u0432\u0438\u043d\u043d\u0456 \u0448\u0438\u0444\u0440\u0443\u0432\u0430\u0442\u0438\u0441\u044f \u0437\u0430 \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043e\u043c AES-256-GCM. \u041f\u0435\u0440\u0435\u0434\u0430\u0447\u0430 \u0434\u0430\u043d\u0438\u0445 \u0447\u0435\u0440\u0435\u0437 \u043f\u0443\u0431\u043b\u0456\u0447\u043d\u0456 \u043c\u0435\u0440\u0435\u0436\u0456 \u0437\u043e\u0431\u043e\u0432'\u044f\u0437\u0430\u043d\u0430 \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u043f\u0440\u043e\u0442\u043e\u043a\u043e\u043b TLS 1.3 \u0456\u0437 \u0433\u0430\u0440\u0430\u043d\u0442\u0456\u0454\u044e \u043f\u0440\u044f\u043c\u043e\u0457 \u0441\u0435\u043a\u0440\u0435\u0442\u043d\u043e\u0441\u0442\u0456 (PFS). \u0417\u0430\u0441\u0442\u0430\u0440\u0456\u043b\u0456 \u0448\u0438\u0444\u0440\u0438 (\u0432\u043a\u043b\u044e\u0447\u0430\u044e\u0447\u0438 RSA key exchange \u0442\u0430 CBC) \u0441\u0443\u0432\u043e\u0440\u043e \u0437\u0430\u0431\u043e\u0440\u043e\u043d\u0435\u043d\u0456.\",\n      \"col3\": \"\ud83d\udd12 **Security Standards Alignment:**\\n\\n- Databases enforce hardware disk encryption with KMS key rotation every 90 days.\\n- Ingress controller forcibly rejects client sessions below TLS 1.3.\\n- Zero-plaintext storage policy is codified in the architecture specification.\"\n    },\n    {\n      \"id\": \"3\",\n      \"col1\": \"3. Incident Notification and Escalation Window: In the event of a suspected or confirmed security breach, the Contractor shall notify the Client's CISO within 24 hours of first detection and provide an initial RCA report within 72 hours.\",\n      \"col2\": \"3. \u0420\u0435\u0433\u043b\u0430\u043c\u0435\u043d\u0442 \u0441\u043f\u043e\u0432\u0456\u0449\u0435\u043d\u043d\u044f \u043f\u0440\u043e \u0456\u043d\u0446\u0438\u0434\u0435\u043d\u0442\u0438: \u0423 \u0440\u0430\u0437\u0456 \u043f\u0456\u0434\u043e\u0437\u0440\u0438 \u0430\u0431\u043e \u043f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043d\u043d\u044f \u0432\u0438\u0442\u043e\u043a\u0443 \u0434\u0430\u043d\u0438\u0445 \u0412\u0438\u043a\u043e\u043d\u0430\u0432\u0435\u0446\u044c \u0437\u043e\u0431\u043e\u0432'\u044f\u0437\u0430\u043d\u0438\u0439 \u043f\u043e\u0432\u0456\u0434\u043e\u043c\u0438\u0442\u0438 CISO \u0417\u0430\u043c\u043e\u0432\u043d\u0438\u043a\u0430 \u043f\u0440\u043e\u0442\u044f\u0433\u043e\u043c 24 \u0433\u043e\u0434\u0438\u043d \u0437 \u043c\u043e\u043c\u0435\u043d\u0442\u0443 \u043f\u0435\u0440\u0448\u043e\u0433\u043e \u0432\u0438\u044f\u0432\u043b\u0435\u043d\u043d\u044f \u0442\u0430 \u043d\u0430\u0434\u0430\u0442\u0438 \u043f\u0435\u0440\u0432\u0438\u043d\u043d\u0438\u0439 \u0437\u0432\u0456\u0442 \u043f\u0440\u043e \u0430\u043d\u0430\u043b\u0456\u0437 \u043f\u0435\u0440\u0448\u043e\u043f\u0440\u0438\u0447\u0438\u043d (RCA) \u043f\u0440\u043e\u0442\u044f\u0433\u043e\u043c 72 \u0433\u043e\u0434\u0438\u043d.\",\n      \"col3\": \"\u26a1 **Operational Readiness:**\\n\\n- 24/7/365 SOC coverage with internal response objective (MTTA) <= 15 minutes.\\n- 24-hour escalation requirement is met with substantial buffer.\\n- Integrated with PagerDuty and automated incident playbooks.\"\n    },\n    {\n      \"id\": \"4\",\n      \"col1\": \"4. Intellectual Property and Licensing Rights: All custom automation scripts, infrastructure-as-code manifests, and integration connectors developed specifically under this SOW shall remain the exclusive intellectual property of the Client upon final milestone acceptance.\",\n      \"col2\": \"4. \u0406\u043d\u0442\u0435\u043b\u0435\u043a\u0442\u0443\u0430\u043b\u044c\u043d\u0430 \u0432\u043b\u0430\u0441\u043d\u0456\u0441\u0442\u044c \u0442\u0430 \u043b\u0456\u0446\u0435\u043d\u0437\u0456\u0439\u043d\u0456 \u043f\u0440\u0430\u0432\u0430: \u0423\u0441\u0456 \u0441\u043f\u0435\u0446\u0456\u0430\u043b\u0456\u0437\u043e\u0432\u0430\u043d\u0456 \u0441\u043a\u0440\u0438\u043f\u0442\u0438 \u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0437\u0430\u0446\u0456\u0457, \u043c\u0430\u043d\u0456\u0444\u0435\u0441\u0442\u0438 \u0456\u043d\u0444\u0440\u0430\u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0438 \u044f\u043a \u043a\u043e\u0434\u0443 (IaC) \u0442\u0430 \u0456\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0456\u0439\u043d\u0456 \u043c\u043e\u0434\u0443\u043b\u0456, \u0440\u043e\u0437\u0440\u043e\u0431\u043b\u0435\u043d\u0456 \u0432 \u0440\u0430\u043c\u043a\u0430\u0445 \u0446\u044c\u043e\u0433\u043e \u0422\u0417, \u043f\u0435\u0440\u0435\u0445\u043e\u0434\u044f\u0442\u044c \u0443 \u0432\u0438\u043a\u043b\u044e\u0447\u043d\u0443 \u0432\u043b\u0430\u0441\u043d\u0456\u0441\u0442\u044c \u0417\u0430\u043c\u043e\u0432\u043d\u0438\u043a\u0430 \u043f\u0456\u0441\u043b\u044f \u043e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u043f\u0440\u0438\u0439\u043c\u0430\u043d\u043d\u044f \u0435\u0442\u0430\u043f\u0443.\",\n      \"col3\": \"\ud83d\udcc4 **Licensing Review:**\\n\\n- Proprietary platform libraries are delivered under permissive MIT / Apache 2.0 terms.\\n- Client-specific code is isolated in a dedicated repository.\\n- Zero patent or licensing conflicts identified.\"\n    },\n    {\n      \"id\": \"5\",\n      \"col1\": \"5. Independent Audit and Verification: The Client reserves the right to conduct an annual third-party SOC 2 Type II or ISO/IEC 27001 compliance assessment. The Contractor shall facilitate log access and evidence inspection without undue delay.\",\n      \"col2\": \"5. \u041d\u0435\u0437\u0430\u043b\u0435\u0436\u043d\u0438\u0439 \u0430\u0443\u0434\u0438\u0442 \u0442\u0430 \u0432\u0435\u0440\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u044f: \u0417\u0430\u043c\u043e\u0432\u043d\u0438\u043a \u0437\u0430\u043b\u0438\u0448\u0430\u0454 \u0437\u0430 \u0441\u043e\u0431\u043e\u044e \u043f\u0440\u0430\u0432\u043e \u043f\u0440\u043e\u0432\u043e\u0434\u0438\u0442\u0438 \u0449\u043e\u0440\u0456\u0447\u043d\u0438\u0439 \u043d\u0435\u0437\u0430\u043b\u0435\u0436\u043d\u0438\u0439 \u0430\u0443\u0434\u0438\u0442 \u043d\u0430 \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u043d\u0456\u0441\u0442\u044c \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u0430\u043c SOC 2 Type II \u0430\u0431\u043e ISO/IEC 27001. \u0412\u0438\u043a\u043e\u043d\u0430\u0432\u0435\u0446\u044c \u0437\u043e\u0431\u043e\u0432'\u044f\u0437\u0443\u0454\u0442\u044c\u0441\u044f \u0441\u0432\u043e\u0454\u0447\u0430\u0441\u043d\u043e \u043d\u0430\u0434\u0430\u0442\u0438 \u0430\u0443\u0434\u0438\u0442\u043e\u0440\u0430\u043c \u0434\u043e\u0441\u0442\u0443\u043f \u0434\u043e \u0436\u0443\u0440\u043d\u0430\u043b\u0456\u0432 \u0442\u0430 \u0434\u043e\u043a\u0430\u0437\u043e\u0432\u043e\u0457 \u0431\u0430\u0437\u0438.\",\n      \"col3\": \"\ud83d\udee1\ufe0f **Audit Preparedness:**\\n\\n- Annual SOC 2 Type II assessment is completed and maintained by an accredited independent auditor.\\n- Immutable Audit Logs are stored in tamper-proof S3 WORM storage with deletion locks.\\n- Routine compliance review proceeds without operational friction.\"\n    }\n  ]\n}\n";
+    const DEFAULT_DOCUMENT = JSON.parse(DEFAULT_DOCUMENT_RAW);
+
+    let currentDoc = DEFAULT_DOCUMENT;
+    let currentRawString = DEFAULT_DOCUMENT_RAW;
+    let currentFullHash = "";
+
+    // Настройки пользователя (по умолчанию)
+    let userPrefs = {
+      fontSize: 16.5,
+      lineHeight: 1.78,
+      ratio: "30-30-40"
+    };
+
+    // Загрузка сохраненных настроек
+    function loadUserPrefs() {
+      const saved = localStorage.getItem("operator_cockpit_prefs");
+      if (saved) {
+        try {
+          userPrefs = Object.assign(userPrefs, JSON.parse(saved));
+        } catch (e) {}
+      }
+      applyUserPrefs();
+    }
+
+    function saveUserPrefs() {
+      localStorage.setItem("operator_cockpit_prefs", JSON.stringify(userPrefs));
+    }
+
+    function applyUserPrefs() {
+      document.documentElement.style.setProperty("--font-size", userPrefs.fontSize + "px");
+      document.documentElement.style.setProperty("--line-height", userPrefs.lineHeight);
+      document.getElementById("fontSizeDisplay").textContent = userPrefs.fontSize.toFixed(1) + "px";
+
+      // Пропорции колонок
+      let c1 = "30%", c2 = "30%", c3 = "40%";
+      if (userPrefs.ratio === "33-33-33") { c1 = "33.3%"; c2 = "33.3%"; c3 = "33.3%"; }
+      if (userPrefs.ratio === "25-25-50") { c1 = "25%"; c2 = "25%"; c3 = "50%"; }
+      document.documentElement.style.setProperty("--col1-w", c1);
+      document.documentElement.style.setProperty("--col2-w", c2);
+      document.documentElement.style.setProperty("--col3-w", c3);
+
+      // Обновление кнопок
+      document.querySelectorAll("[data-lh]").forEach(b => {
+        b.classList.toggle("active", parseFloat(b.dataset.lh) === userPrefs.lineHeight);
+      });
+      document.querySelectorAll("[data-ratio]").forEach(b => {
+        b.classList.toggle("active", b.dataset.ratio === userPrefs.ratio);
+      });
+    }
+
+    function updateStickyHeader() {
+      const hdr = document.querySelector("header");
+      if (hdr) {
+        const h = hdr.offsetHeight;
+        document.documentElement.style.setProperty("--header-height", h + "px");
+      }
+    }
+    window.addEventListener("resize", updateStickyHeader);
+
+    // Расчет криптографического хэша SHA-256 через Web Crypto API с канонической нормализацией (CRLF -> LF)
+    async function computeSHA256(text) {
+      const normalized = (text || "").replace(/\r\n/g, "\n");
+      const encoder = new TextEncoder();
+      const data = encoder.encode(normalized);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    // Легковесный Markdown парсер с корректной группировкой списков в единый <ul>
+    function renderMarkdown(md) {
+      if (!md) return "";
+      let html = md
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\*(.+?)\*/g, "<em>$1</em>")
+        .replace(/`([^`]+)`/g, "<code>$1</code>");
+
+      const lines = html.split(/\r?\n/);
+      let out = "";
+      let inList = false;
+      let inParagraph = false;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        const listMatch = line.match(/^[\*\-]\s+(.+)$/);
+
+        if (listMatch) {
+          if (inParagraph) {
+            out += "</p>";
+            inParagraph = false;
+          }
+          if (!inList) {
+            out += "<ul>";
+            inList = true;
+          }
+          out += "<li>" + listMatch[1] + "</li>";
+        } else if (line === "") {
+          if (inList) {
+            out += "</ul>";
+            inList = false;
+          }
+          if (inParagraph) {
+            out += "</p>";
+            inParagraph = false;
+          }
+        } else {
+          if (inList) {
+            out += "</ul>";
+            inList = false;
+          }
+          if (!inParagraph) {
+            out += "<p>";
+            inParagraph = true;
+          } else {
+            out += "<br>";
+          }
+          out += line;
+        }
+      }
+
+      if (inList) out += "</ul>";
+      if (inParagraph) out += "</p>";
+
+      return out || "<p></p>";
+    }
+
+    // Рендеринг документа в DOM с высокой производительностью (DocumentFragment)
+    async function renderDocument(doc, rawText) {
+      currentDoc = doc;
+      currentRawString = rawText;
+
+      // Вычисление SHA-256 (Anti-Drift Header: полный 64-символьный хэш без усечений)
+      currentFullHash = await computeSHA256(rawText);
+      document.getElementById("hashText").textContent = currentFullHash;
+      document.getElementById("hashBadge").title = `Click to copy full SHA-256 hash:\n${currentFullHash}`;
+
+      // Метаданные
+      document.getElementById("docTitle").textContent = doc.metadata?.title || "Untitled Document";
+      document.getElementById("docCount").textContent = (doc.items?.length || 0) + " clauses";
+
+      // Заголовки колонок
+      if (doc.columns && doc.columns.length >= 3) {
+        document.getElementById("hdrCol1").textContent = doc.columns[0].title || "Column 1";
+        document.getElementById("hdrCol2").textContent = doc.columns[1].title || "Column 2";
+        document.getElementById("hdrCol3").textContent = doc.columns[2].title || "Column 3";
+      }
+
+      // Отрисовка строк через DocumentFragment для 100+ пунктов
+      const container = document.getElementById("rowsContainer");
+      container.innerHTML = "";
+
+      if (!doc.items || doc.items.length === 0) {
+        container.innerHTML = "<div style='text-align:center; padding: 40px; color:#94a3b8;'>No clauses to display in this document</div>";
+        updateStickyHeader();
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      doc.items.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "doc-row";
+        row.id = `row-${item.id}`;
+        row.dataset.rowId = item.id;
+
+        row.innerHTML = `
+          <div class="row-badge" onclick="copyRowId('${item.id}')" title="Click to copy clause ID">${item.id}</div>
+          <div class="row-grid">
+            <div class="col-cell col1">${renderMarkdown(item.col1)}</div>
+            <div class="col-cell col2">${renderMarkdown(item.col2)}</div>
+            <div class="col-cell col3">${renderMarkdown(item.col3)}</div>
+          </div>
+        `;
+        fragment.appendChild(row);
+      });
+      container.appendChild(fragment);
+
+      updateStickyHeader();
+    }
+
+    // Всплывающие уведомления (Toast)
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.style.display = "block";
+      clearTimeout(t._timer);
+      t._timer = setTimeout(() => { t.style.display = "none"; }, 2400);
+    }
+
+    // Надежное копирование в буфер обмена с фоллбэком
+    async function copyToClipboard(text, successMsg) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          ta.style.top = "-9999px";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+        }
+        showToast(successMsg);
+      } catch (err) {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          ta.style.top = "-9999px";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          showToast(successMsg);
+        } catch (e) {
+          showToast(text);
+        }
+      }
+    }
+
+    function copyRowId(id) {
+      copyToClipboard(`Пункт ${id}`, `Скопировано в буфер: Пункт ${id}`);
+    }
+
+    document.getElementById("hashBadge").addEventListener("click", () => {
+      copyToClipboard(currentFullHash, `SHA-256 скопирован: ${currentFullHash}`);
+    });
+
+    // Обработка открытия файлов
+    function handleFile(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const text = e.target.result;
+          const json = JSON.parse(text);
+          renderDocument(json, text);
+          showToast(`Файл «${file.name}» успешно загружен`);
+        } catch (err) {
+          alert("Ошибка парсинга JSON файла: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    document.getElementById("fileInput").addEventListener("change", (e) => {
+      if (e.target.files.length > 0) {
+        handleFile(e.target.files[0]);
+      }
+    });
+
+    // Drag & Drop файлов
+    window.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      document.getElementById("dropOverlay").style.display = "flex";
+    });
+
+    window.addEventListener("dragleave", (e) => {
+      if (e.clientX <= 0 || e.clientY <= 0) {
+        document.getElementById("dropOverlay").style.display = "none";
+      }
+    });
+
+    window.addEventListener("drop", (e) => {
+      e.preventDefault();
+      document.getElementById("dropOverlay").style.display = "none";
+      if (e.dataTransfer.files.length > 0) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    // Поиск по строкам с плавной прокруткой и циклическим переходом
+    let searchMatches = [];
+    let currentMatchIndex = -1;
+    let searchScrollTimeout = null;
+
+    function pulseRow(row) {
+      row.style.transition = "box-shadow 0.2s ease, border-color 0.2s ease";
+      row.style.borderColor = "#3b82f6";
+      row.style.boxShadow = "0 0 0 3px rgba(59, 130, 246, 0.25)";
+      setTimeout(() => {
+        row.style.borderColor = "";
+        row.style.boxShadow = "";
+      }, 1400);
+    }
+
+    function handleSearch(scrollFirst = true) {
+      const q = document.getElementById("searchInput").value.toLowerCase().trim();
+      searchMatches = [];
+      currentMatchIndex = -1;
+
+      const rows = document.querySelectorAll(".doc-row");
+      const totalCount = currentDoc.items?.length || rows.length;
+
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const matches = (q === "") || text.includes(q);
+        row.style.display = matches ? "flex" : "none";
+        if (matches && q !== "") {
+          searchMatches.push(row);
+        }
+      });
+
+      const docCountEl = document.getElementById("docCount");
+      if (q === "") {
+        docCountEl.textContent = `${totalCount} пунктов`;
+        clearTimeout(searchScrollTimeout);
+      } else {
+        docCountEl.textContent = `${searchMatches.length} из ${totalCount}`;
+        if (searchMatches.length > 0 && scrollFirst) {
+          currentMatchIndex = 0;
+          clearTimeout(searchScrollTimeout);
+          searchScrollTimeout = setTimeout(() => {
+            searchMatches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            pulseRow(searchMatches[0]);
+          }, 120);
+        }
+      }
+    }
+
+    document.getElementById("searchInput").addEventListener("input", () => {
+      handleSearch(true);
+    });
+
+    document.getElementById("searchInput").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && searchMatches.length > 0) {
+        e.preventDefault();
+        currentMatchIndex = (currentMatchIndex + 1) % searchMatches.length;
+        const target = searchMatches[currentMatchIndex];
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        pulseRow(target);
+      } else if (e.key === "Escape") {
+        e.target.value = "";
+        handleSearch(false);
+      }
+    });
+
+    // Настройки интерфейса (размер шрифта, интервалы)
+    document.getElementById("fontInc").addEventListener("click", () => {
+      if (userPrefs.fontSize < 24) {
+        userPrefs.fontSize += 1;
+        applyUserPrefs();
+        saveUserPrefs();
+      }
+    });
+
+    document.getElementById("fontDec").addEventListener("click", () => {
+      if (userPrefs.fontSize > 13) {
+        userPrefs.fontSize -= 1;
+        applyUserPrefs();
+        saveUserPrefs();
+      }
+    });
+
+    document.querySelectorAll("[data-lh]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        userPrefs.lineHeight = parseFloat(e.target.dataset.lh);
+        applyUserPrefs();
+        saveUserPrefs();
+      });
+    });
+
+    document.querySelectorAll("[data-ratio]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        userPrefs.ratio = e.target.dataset.ratio;
+        applyUserPrefs();
+        saveUserPrefs();
+      });
+    });
+
+    // Встроенный текстовый маркер (Moon+ Reader Style)
+    const hlTooltip = document.getElementById("hlTooltip");
+
+    // Предотвращаем сброс текстового выделения при клике на кнопки панели маркера
+    hlTooltip.addEventListener("mousedown", (e) => e.preventDefault());
+    document.getElementById("btnHlYellow").addEventListener("mousedown", (e) => e.preventDefault());
+    document.getElementById("btnHlRed").addEventListener("mousedown", (e) => e.preventDefault());
+    document.getElementById("btnHlClear").addEventListener("mousedown", (e) => e.preventDefault());
+
+    // Вспомогательная функция проверки принадлежности к единой ячейке .col-cell
+    function getCellFromRange(range) {
+      if (!range) return null;
+      let node = range.commonAncestorContainer;
+      let el = (node.nodeType === Node.ELEMENT_NODE) ? node : node.parentElement;
+      return el ? el.closest(".col-cell") : null;
+    }
+
+    // Показ тултипа при выделении текста строго внутри одной ячейки .col-cell
+    document.addEventListener("mouseup", (e) => {
+      if (e.target.closest("#hlTooltip")) return;
+
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.toString().trim() === "") {
+        hlTooltip.style.display = "none";
+        return;
+      }
+
+      const range = sel.getRangeAt(0);
+      const cell = getCellFromRange(range);
+      if (!cell) {
+        // Выделение пересекает границы колонок/строк - скрываем тултип во избежание деформации сетки
+        hlTooltip.style.display = "none";
+        return;
+      }
+
+      const rect = range.getBoundingClientRect();
+      if (rect.width === 0 && rect.height === 0) {
+        hlTooltip.style.display = "none";
+        return;
+      }
+
+      hlTooltip.style.left = `${Math.max(10, window.scrollX + rect.left + rect.width / 2 - 100)}px`;
+      hlTooltip.style.top = `${Math.max(10, window.scrollY + rect.top - 44)}px`;
+      hlTooltip.style.display = "flex";
+    });
+
+    // Скрытие тултипа при клике вне его
+    document.addEventListener("mousedown", (e) => {
+      if (!e.target.closest("#hlTooltip")) {
+        hlTooltip.style.display = "none";
+      }
+    });
+
+    function applyHighlight(className) {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed) return;
+
+      const range = sel.getRangeAt(0);
+      if (range.toString().trim() === "") return;
+
+      // Строго проверяем, что выделение целиком внутри одной ячейки .col-cell
+      const cell = getCellFromRange(range);
+      if (!cell) {
+        showToast("Маркер можно ставить только внутри одной колонки");
+        hlTooltip.style.display = "none";
+        return;
+      }
+
+      const mark = document.createElement("mark");
+      mark.className = className;
+      mark.title = "Кликните, чтобы снять маркер";
+
+      try {
+        const fragment = range.extractContents();
+        // Разворачиваем возможные вложенные теги mark
+        fragment.querySelectorAll?.("mark").forEach(m => m.replaceWith(...m.childNodes));
+        mark.appendChild(fragment);
+        range.insertNode(mark);
+        mark.parentNode?.normalize();
+        sel.removeAllRanges();
+      } catch (e) {
+        console.warn("Не удалось применить маркер:", e);
+      }
+      hlTooltip.style.display = "none";
+    }
+
+    document.getElementById("btnHlYellow").addEventListener("click", () => {
+      applyHighlight("hl-yellow");
+    });
+
+    document.getElementById("btnHlRed").addEventListener("click", () => {
+      applyHighlight("hl-red");
+    });
+
+    // Разворачивание тегов mark (unwrap)
+    function unwrapMarks(marks) {
+      marks.forEach(mark => {
+        const parent = mark.parentNode;
+        if (!parent) return;
+        mark.replaceWith(...mark.childNodes);
+        parent.normalize();
+      });
+    }
+
+    // Снятие маркеров по кнопке Сброс в тултипе
+    function clearSelectedHighlights() {
+      const sel = window.getSelection();
+      let unwrappedCount = 0;
+
+      if (sel && sel.rangeCount > 0) {
+        const range = sel.getRangeAt(0);
+        const marksToUnwrap = new Set();
+
+        // 1. Поиск объемлющего mark
+        let node = range.commonAncestorContainer;
+        let elem = node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+        const parentMark = elem ? elem.closest("mark") : null;
+        if (parentMark) marksToUnwrap.add(parentMark);
+
+        const startElem = range.startContainer.nodeType === Node.ELEMENT_NODE ? range.startContainer : range.startContainer.parentElement;
+        const startMark = startElem ? startElem.closest("mark") : null;
+        if (startMark) marksToUnwrap.add(startMark);
+
+        const endElem = range.endContainer.nodeType === Node.ELEMENT_NODE ? range.endContainer : range.endContainer.parentElement;
+        const endMark = endElem ? endElem.closest("mark") : null;
+        if (endMark) marksToUnwrap.add(endMark);
+
+        // 2. Поиск всех mark внутри или пересекающих диапазон
+        document.querySelectorAll("#rowsContainer mark").forEach(m => {
+          try {
+            if (range.intersectsNode(m)) {
+              marksToUnwrap.add(m);
+            }
+          } catch (err) {}
+        });
+
+        if (marksToUnwrap.size > 0) {
+          unwrappedCount = marksToUnwrap.size;
+          unwrapMarks(Array.from(marksToUnwrap));
+        }
+      }
+
+      hlTooltip.style.display = "none";
+      if (sel) sel.removeAllRanges();
+
+      if (unwrappedCount > 0) {
+        showToast(`Highlights cleared (${unwrappedCount})`);
+      } else {
+        showToast("Highlights cleared");
+      }
+    }
+
+    document.getElementById("btnHlClear").addEventListener("click", clearSelectedHighlights);
+
+    // Удаление маркера по прямому клику на него
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("#hlTooltip")) return;
+
+      const mark = e.target.closest("mark");
+      if (mark) {
+        const sel = window.getSelection();
+        if (sel && !sel.isCollapsed && sel.toString().trim().length > 0) {
+          return;
+        }
+        const parent = mark.parentNode;
+        mark.replaceWith(...mark.childNodes);
+        if (parent) parent.normalize();
+        hlTooltip.style.display = "none";
+        showToast("Highlight removed");
+      }
+    });
+
+    // Инициализация при старте
+    loadUserPrefs();
+
+    async function initApp() {
+      // 1. Приоритетная загрузка из active_document.js (100% надежно без CORS по протоколу file:///)
+      if (window.ACTIVE_PARALLELDOC && window.ACTIVE_PARALLELDOC.items && Array.isArray(window.ACTIVE_PARALLELDOC.items)) {
+        // Используем точный исходный текст файла без ресериализации, гарантируя совпадение SHA-256
+        const rawText = window.ACTIVE_PARALLELDOC_RAW || JSON.stringify(window.ACTIVE_PARALLELDOC, null, 2);
+        await renderDocument(window.ACTIVE_PARALLELDOC, rawText);
+        return;
+      }
+
+      // 2. Попытка загрузить active_document.json (если запущен локальный сервер)
+      try {
+        const resp = await fetch("active_document.json?t=" + Date.now());
+        if (resp.ok) {
+          const rawText = await resp.text();
+          const doc = JSON.parse(rawText);
+          if (doc && doc.items && Array.isArray(doc.items)) {
+            await renderDocument(doc, rawText);
+            return;
+          }
+        }
+      } catch (err) {
+        console.log("active_document.json не обнаружен или доступ ограничен, загружен пилот:", err);
+      }
+      // 3. Фолбэк на встроенный канонический пилот
+      await renderDocument(DEFAULT_DOCUMENT, DEFAULT_DOCUMENT_RAW);
+    }
+
+
+    initApp();
+  </script>
+</body>
+</html>
