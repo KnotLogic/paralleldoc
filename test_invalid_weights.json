@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "title": "Fallback width test",
+    "document_id": "TEST-FALLBACK-WIDTHS"
+  },
+  "columns": [
+    { "key": "col1", "title": "A", "width_weight": 10 },
+    { "key": "col2", "title": "B", "width_weight": 0 },
+    { "key": "col3", "title": "C" }
+  ],
+  "items": [
+    { "id": "1", "col1": "Alpha", "col2": "Beta", "col3": "Gamma" }
+  ]
+}

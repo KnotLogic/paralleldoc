@@ -7,6 +7,8 @@ import sys
 import os
 import tempfile
 import hashlib
+import socket
+import shutil
 from pathlib import Path
 import websockets
 
@@ -17,12 +19,12 @@ if sys.platform == 'win32':
 def find_browser_executable():
     env = os.environ
     candidates = [
-        Path(env.get("LOCALAPPDATA", "")) / "BraveSoftware" / "Brave-Browser" / "Application" / "brave.exe",
-        Path(env.get("ProgramFiles", "")) / "BraveSoftware" / "Brave-Browser" / "Application" / "brave.exe",
-        Path(env.get("ProgramFiles(x86)", "")) / "BraveSoftware" / "Brave-Browser" / "Application" / "brave.exe",
         Path(env.get("ProgramFiles(x86)", "")) / "Microsoft" / "Edge" / "Application" / "msedge.exe",
         Path(env.get("ProgramFiles", "")) / "Microsoft" / "Edge" / "Application" / "msedge.exe",
         Path(env.get("LOCALAPPDATA", "")) / "Microsoft" / "Edge" / "Application" / "msedge.exe",
+        Path(env.get("LOCALAPPDATA", "")) / "BraveSoftware" / "Brave-Browser" / "Application" / "brave.exe",
+        Path(env.get("ProgramFiles", "")) / "BraveSoftware" / "Brave-Browser" / "Application" / "brave.exe",
+        Path(env.get("ProgramFiles(x86)", "")) / "BraveSoftware" / "Brave-Browser" / "Application" / "brave.exe",
         Path(env.get("ProgramFiles", "")) / "Google" / "Chrome" / "Application" / "chrome.exe",
         Path(env.get("ProgramFiles(x86)", "")) / "Google" / "Chrome" / "Application" / "chrome.exe",
     ]
@@ -34,11 +36,16 @@ def find_browser_executable():
 BROWSER_PATH = find_browser_executable()
 HTML_PATH = Path(__file__).resolve().parent / "paralleldoc.html"
 HTML_URL = HTML_PATH.as_uri()
-PROFILE_DIR = str(Path(tempfile.gettempdir()) / "paralleldoc_cdp_test_profile")
+PROFILE_DIR = tempfile.mkdtemp(prefix="paralleldoc_cdp_test_")
+
+def find_free_port():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind(("127.0.0.1", 0))
+        return sock.getsockname()[1]
 
 class CDPClient:
-    def __init__(self, port=9232):
-        self.port = port
+    def __init__(self, port=None):
+        self.port = port or find_free_port()
         self.proc = None
         self.ws = None
         self.msg_id = 0
@@ -98,6 +105,7 @@ class CDPClient:
                 self.proc.wait(timeout=3)
             except Exception:
                 self.proc.kill()
+        shutil.rmtree(PROFILE_DIR, ignore_errors=True)
 
 async def run_tests():
     client = CDPClient()
@@ -290,20 +298,90 @@ async def run_tests():
         assert esc_res['displayedRows'] == 5
         print("✅ Test 11 Passed: Search and escape reset work cleanly")
 
-        # Test 12: Clipboard copy handlers don't throw errors
+        # Test 12: Row and cell clipboard text
         js_clipboard = """
         (() => {
-            // Click hashBadge
-            document.getElementById('hashBadge').click();
-            // Click row badge
             copyRowId('1');
-            return true;
+            const rowText = window.__lastCopiedText;
+            copyCell('1', 0);
+            const cellText = window.__lastCopiedText;
+            return { rowText, cellText };
         })()
         """
-        clip_ok = await client.eval_js(js_clipboard)
-        print(f"Test 12 - Clipboard copy executed without errors: {clip_ok}")
-        assert clip_ok == True
-        print("✅ Test 12 Passed: Clipboard copying executed cleanly with robust fallback")
+        clip_res = await client.eval_js(js_clipboard)
+        print(f"Test 12 - Clipboard result: {clip_res}")
+        assert "Original Clause (EN)\n" in clip_res["rowText"]
+        assert "Target Translation (UA)\n" in clip_res["rowText"]
+        assert "Engineering & Risk Assessment (EN)\n" in clip_res["rowText"]
+        assert "**" not in clip_res["rowText"]
+        assert clip_res["cellText"].startswith("1. High Availability")
+        assert "Target Translation" not in clip_res["cellText"]
+        print("✅ Test 12 Passed: Row and cell copying produce clean structured text")
+
+        # Test 13: JSON column weights and manual ratio modes
+        ratio_res = await client.eval_js("""
+        (() => {
+            userPrefs.ratio = 'from-json';
+            applyUserPrefs();
+            const fromJson = [
+                getComputedStyle(document.documentElement).getPropertyValue('--col1-w').trim(),
+                getComputedStyle(document.documentElement).getPropertyValue('--col2-w').trim(),
+                getComputedStyle(document.documentElement).getPropertyValue('--col3-w').trim()
+            ];
+            userPrefs.ratio = '25-25-50';
+            applyUserPrefs();
+            const manual = getComputedStyle(document.documentElement).getPropertyValue('--col3-w').trim();
+            userPrefs.ratio = 'from-json';
+            applyUserPrefs();
+            return { fromJson, manual };
+        })()
+        """)
+        print(f"Test 13 - Ratios: {ratio_res}")
+        assert ratio_res["fromJson"] == ["30.0000fr", "30.0000fr", "40.0000fr"]
+        assert ratio_res["manual"] == "50fr"
+        print("✅ Test 13 Passed: JSON and manual column ratios work")
+
+        # Test 14: Data rows scroll normally and every cell exposes a copy button
+        sticky_res = await client.eval_js("""
+        (() => ({
+            position: getComputedStyle(document.querySelector('.doc-row:first-child')).position,
+            copyButtons: document.querySelectorAll('.cell-copy-btn').length,
+            firstRowButtons: document.querySelectorAll('.doc-row:first-child .cell-copy-btn').length
+        }))()
+        """)
+        print(f"Test 14 - Sticky/copy UI: {sticky_res}")
+        assert sticky_res["position"] == "static"
+        assert sticky_res["copyButtons"] == 15
+        assert sticky_res["firstRowButtons"] == 3
+        print("✅ Test 14 Passed: Data rows remain unpinned and cell copy buttons render")
+
+        # Test 15: In-memory JSON history, navigation, and forward-branch truncation
+        history_res = await client.eval_js("""
+        (async () => {
+            const doc2 = JSON.parse(JSON.stringify(currentDoc));
+            doc2.metadata.title = 'History document 2';
+            await addDocumentToHistory(doc2, JSON.stringify(doc2), 'second.json');
+            await navigateHistory(-1);
+            const afterBack = { index: currentHistoryIndex, file: currentFileName };
+            const doc3 = JSON.parse(JSON.stringify(currentDoc));
+            doc3.metadata.title = 'History document 3';
+            await addDocumentToHistory(doc3, JSON.stringify(doc3), 'third.json');
+            return {
+                afterBack,
+                index: currentHistoryIndex,
+                length: documentHistory.length,
+                file: currentFileName,
+                forwardDisabled: document.getElementById('historyForward').disabled
+            };
+        })()
+        """, await_promise=True)
+        print(f"Test 15 - History: {history_res}")
+        assert history_res["afterBack"]["index"] == 0
+        assert history_res["length"] == 2
+        assert history_res["index"] == 1
+        assert history_res["file"] == "third.json"
+        assert history_res["forwardDisabled"] is True
+        print("✅ Test 15 Passed: Session history navigates and truncates forward branches")
 
     finally:
         await client.close()

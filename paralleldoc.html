@@ -9,22 +9,25 @@
       --font-family: Georgia, Cambria, "Times New Roman", serif;
       --font-size: 16.5px;
       --line-height: 1.78;
-      --col1-w: 30%;
-      --col2-w: 30%;
-      --col3-w: 40%;
+      --col1-w: 30fr;
+      --col2-w: 30fr;
+      --col3-w: 40fr;
       --bg-page: #f8fafc;
       --bg-card: #ffffff;
       --text-main: #1e293b;
       --text-muted: #64748b;
       --border-card: #e2e8f0;
       --border-card-hover: #3b82f6;
-      --badge-red: #ef4444;
+      --badge-bg: #475569;
+      --badge-bg-hover: #334155;
       --col3-accent: #2563eb;
       --col3-bg: #f8fafc;
       --hl-yellow: #fef08a;
       --hl-red-bg: #fee2e2;
       --hl-red-border: #ef4444;
       --header-height: 92px;
+      --columns-header-height: 50px;
+      --sticky-content-top: 142px;
     }
 
     body, * {
@@ -180,6 +183,12 @@
       background: #f8fafc;
       border-color: #94a3b8;
     }
+    .btn:disabled {
+      opacity: 0.42;
+      cursor: default;
+      background: #f8fafc;
+      border-color: #e2e8f0;
+    }
     .btn-primary {
       background: #2563eb;
       color: #ffffff;
@@ -202,6 +211,40 @@
     .search-input:focus {
       border-color: #3b82f6;
       width: 250px;
+    }
+
+    .history-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .history-btn {
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      justify-content: center;
+      font-size: 17px;
+    }
+    .history-status {
+      display: flex;
+      flex-direction: column;
+      min-width: 110px;
+      max-width: 190px;
+      line-height: 1.15;
+    }
+    .history-file {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .history-position {
+      color: #94a3b8;
+      font-size: 10px;
     }
 
     /* Настройки чтения (Font Size, Spacing) */
@@ -304,13 +347,14 @@
       box-shadow: 0 4px 12px rgba(59, 130, 246, 0.07);
     }
 
-    /* Бейдж номера пункта (ShareX Callout Style) */
+    /* Спокойный номер строки; по клику копирует всю строку */
     .row-badge {
       flex-shrink: 0;
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: var(--badge-red);
+      border: 1px solid #334155;
+      background: var(--badge-bg);
       color: #ffffff;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-weight: 700;
@@ -318,10 +362,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(239, 68, 68, 0.35);
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
       margin-top: 2px;
       user-select: none;
       cursor: pointer;
+      padding: 0;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+    .row-badge:hover,
+    .row-badge:focus-visible {
+      background: var(--badge-bg-hover);
+      box-shadow: 0 3px 9px rgba(15, 23, 42, 0.28);
+      transform: translateY(-1px);
+      outline: 2px solid #93c5fd;
+      outline-offset: 2px;
     }
 
     .row-grid {
@@ -337,6 +391,36 @@
       word-break: break-word;
       font-size: var(--font-size);
       line-height: var(--line-height);
+      position: relative;
+      padding-top: 28px;
+    }
+
+    .cell-copy-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #64748b;
+      font-size: 14px;
+      cursor: pointer;
+      opacity: 0.38;
+      transition: opacity 0.15s, color 0.15s, border-color 0.15s, background 0.15s;
+    }
+    .col-cell:hover .cell-copy-btn,
+    .cell-copy-btn:focus-visible {
+      opacity: 1;
+      color: #1d4ed8;
+      border-color: #93c5fd;
+      background: #ffffff;
+      outline: none;
     }
 
     .col-cell p {
@@ -358,7 +442,7 @@
     .col-cell.col3 {
       background-color: var(--col3-bg);
       border-left: 3px solid var(--col3-accent);
-      padding: 10px 14px;
+      padding: 32px 14px 10px;
       border-radius: 0 6px 6px 0;
     }
 
@@ -486,6 +570,14 @@
       </div>
 
       <div class="actions-bar">
+        <div class="history-nav" aria-label="История загруженных JSON">
+          <button class="btn history-btn" id="historyBack" type="button" title="Предыдущий JSON" aria-label="Предыдущий JSON">←</button>
+          <button class="btn history-btn" id="historyForward" type="button" title="Следующий JSON" aria-label="Следующий JSON">→</button>
+          <div class="history-status" title="Текущий JSON-файл">
+            <span class="history-file" id="historyFile">Демонстрационный документ</span>
+            <span class="history-position" id="historyPosition">1 из 1</span>
+          </div>
+        </div>
         <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search clauses (Ctrl+F)..." autocomplete="off">
         <input type="file" id="fileInput" accept=".json">
         <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">📂 Open JSON</button>
@@ -510,7 +602,8 @@
 
       <div class="settings-group">
         <span>Column ratio:</span>
-        <button class="btn-mini active" data-ratio="30-30-40">30 / 30 / 40</button>
+        <button class="btn-mini active" data-ratio="from-json">Из JSON</button>
+        <button class="btn-mini" data-ratio="30-30-40">30 / 30 / 40</button>
         <button class="btn-mini" data-ratio="33-33-33">33 / 33 / 33</button>
         <button class="btn-mini" data-ratio="25-25-50">25 / 25 / 50</button>
       </div>
@@ -545,12 +638,16 @@
     let currentDoc = DEFAULT_DOCUMENT;
     let currentRawString = DEFAULT_DOCUMENT_RAW;
     let currentFullHash = "";
+    let currentFileName = "Демонстрационный документ";
+    const documentHistory = [];
+    let currentHistoryIndex = -1;
+    const MAX_HISTORY_ITEMS = 20;
 
     // Настройки пользователя (по умолчанию)
     let userPrefs = {
       fontSize: 16.5,
       lineHeight: 1.78,
-      ratio: "30-30-40"
+      ratio: "from-json"
     };
 
     // Загрузка сохраненных настроек
@@ -574,9 +671,16 @@
       document.getElementById("fontSizeDisplay").textContent = userPrefs.fontSize.toFixed(1) + "px";
 
       // Пропорции колонок
-      let c1 = "30%", c2 = "30%", c3 = "40%";
-      if (userPrefs.ratio === "33-33-33") { c1 = "33.3%"; c2 = "33.3%"; c3 = "33.3%"; }
-      if (userPrefs.ratio === "25-25-50") { c1 = "25%"; c2 = "25%"; c3 = "50%"; }
+      let c1 = "30fr", c2 = "30fr", c3 = "40fr";
+      if (userPrefs.ratio === "from-json") {
+        const weights = (currentDoc?.columns || []).slice(0, 3).map(col => Number(col?.width_weight));
+        if (weights.length === 3 && weights.every(value => Number.isFinite(value) && value > 0)) {
+          const total = weights.reduce((sum, value) => sum + value, 0);
+          [c1, c2, c3] = weights.map(value => `${(value / total * 100).toFixed(4)}fr`);
+        }
+      }
+      if (userPrefs.ratio === "33-33-33") { c1 = "33.3fr"; c2 = "33.3fr"; c3 = "33.3fr"; }
+      if (userPrefs.ratio === "25-25-50") { c1 = "25fr"; c2 = "25fr"; c3 = "50fr"; }
       document.documentElement.style.setProperty("--col1-w", c1);
       document.documentElement.style.setProperty("--col2-w", c2);
       document.documentElement.style.setProperty("--col3-w", c3);
@@ -592,9 +696,13 @@
 
     function updateStickyHeader() {
       const hdr = document.querySelector("header");
+      const columnsHeader = document.querySelector(".columns-header-bar");
       if (hdr) {
         const h = hdr.offsetHeight;
         document.documentElement.style.setProperty("--header-height", h + "px");
+        const columnsH = columnsHeader?.offsetHeight || 0;
+        document.documentElement.style.setProperty("--columns-header-height", columnsH + "px");
+        document.documentElement.style.setProperty("--sticky-content-top", (h + columnsH) + "px");
       }
     }
     window.addEventListener("resize", updateStickyHeader);
@@ -668,9 +776,11 @@
     }
 
     // Рендеринг документа в DOM с высокой производительностью (DocumentFragment)
-    async function renderDocument(doc, rawText) {
+    async function renderDocument(doc, rawText, fileName = currentFileName) {
       currentDoc = doc;
       currentRawString = rawText;
+      currentFileName = fileName;
+      applyUserPrefs();
 
       // Вычисление SHA-256 (Anti-Drift Header: полный 64-символьный хэш без усечений)
       currentFullHash = await computeSHA256(rawText);
@@ -694,6 +804,7 @@
 
       if (!doc.items || doc.items.length === 0) {
         container.innerHTML = "<div style='text-align:center; padding: 40px; color:#94a3b8;'>No clauses to display in this document</div>";
+        updateHistoryControls();
         updateStickyHeader();
         return;
       }
@@ -706,17 +817,22 @@
         row.dataset.rowId = item.id;
 
         row.innerHTML = `
-          <div class="row-badge" onclick="copyRowId('${item.id}')" title="Click to copy clause ID">${item.id}</div>
+          <button class="row-badge" type="button" title="Скопировать всю строку" aria-label="Скопировать строку ${item.id}">${item.id}</button>
           <div class="row-grid">
-            <div class="col-cell col1">${renderMarkdown(item.col1)}</div>
-            <div class="col-cell col2">${renderMarkdown(item.col2)}</div>
-            <div class="col-cell col3">${renderMarkdown(item.col3)}</div>
+            <div class="col-cell col1"><button class="cell-copy-btn" type="button" title="Скопировать ячейку" aria-label="Скопировать ячейку первой колонки">⧉</button><div class="cell-content">${renderMarkdown(item.col1)}</div></div>
+            <div class="col-cell col2"><button class="cell-copy-btn" type="button" title="Скопировать ячейку" aria-label="Скопировать ячейку второй колонки">⧉</button><div class="cell-content">${renderMarkdown(item.col2)}</div></div>
+            <div class="col-cell col3"><button class="cell-copy-btn" type="button" title="Скопировать ячейку" aria-label="Скопировать ячейку третьей колонки">⧉</button><div class="cell-content">${renderMarkdown(item.col3)}</div></div>
           </div>
         `;
+        row.querySelector(".row-badge").addEventListener("click", () => copyRow(item.id));
+        row.querySelectorAll(".cell-copy-btn").forEach((button, columnIndex) => {
+          button.addEventListener("click", () => copyCell(item.id, columnIndex));
+        });
         fragment.appendChild(row);
       });
       container.appendChild(fragment);
 
+      updateHistoryControls();
       updateStickyHeader();
     }
 
@@ -731,6 +847,7 @@
 
     // Надежное копирование в буфер обмена с фоллбэком
     async function copyToClipboard(text, successMsg) {
+      window.__lastCopiedText = text;
       try {
         if (navigator.clipboard && window.isSecureContext) {
           await navigator.clipboard.writeText(text);
@@ -766,8 +883,48 @@
       }
     }
 
+    function plainTextFromMarkdown(value) {
+      return String(value ?? "")
+        .replace(/\r\n/g, "\n")
+        .replace(/\*\*(.+?)\*\*/g, "$1")
+        .replace(/__(.+?)__/g, "$1")
+        .replace(/`([^`]+)`/g, "$1")
+        .replace(/^\s*[\*-]\s+/gm, "• ")
+        .replace(/\*([^*\n]+)\*/g, "$1")
+        .trim();
+    }
+
+    function findRowItem(id) {
+      return currentDoc?.items?.find(item => String(item.id) === String(id));
+    }
+
+    function copyCell(id, columnIndex) {
+      const item = findRowItem(id);
+      if (!item) return;
+      const key = currentDoc?.columns?.[columnIndex]?.key || `col${columnIndex + 1}`;
+      const value = item[key] ?? item[`col${columnIndex + 1}`] ?? "";
+      copyToClipboard(plainTextFromMarkdown(value), "Ячейка скопирована");
+    }
+
+    function formatRowForClipboard(id) {
+      const item = findRowItem(id);
+      if (!item) return "";
+      return [0, 1, 2].map(index => {
+        const column = currentDoc?.columns?.[index] || {};
+        const key = column.key || `col${index + 1}`;
+        const title = column.title || `Колонка ${index + 1}`;
+        return `${title}\n${plainTextFromMarkdown(item[key] ?? item[`col${index + 1}`] ?? "")}`;
+      }).join("\n\n");
+    }
+
+    function copyRow(id) {
+      const text = formatRowForClipboard(id);
+      if (text) copyToClipboard(text, "Строка скопирована");
+    }
+
+    // Имя сохранено для старых внешних вызовов, но теперь копируется вся строка.
     function copyRowId(id) {
-      copyToClipboard(`Пункт ${id}`, `Скопировано в буфер: Пункт ${id}`);
+      copyRow(id);
     }
 
     document.getElementById("hashBadge").addEventListener("click", () => {
@@ -775,14 +932,51 @@
     });
 
     // Обработка открытия файлов
+    function isSupportedDocument(doc) {
+      return !!doc && Array.isArray(doc.columns) && doc.columns.length >= 3 && Array.isArray(doc.items);
+    }
+
+    function updateHistoryControls() {
+      const entry = documentHistory[currentHistoryIndex];
+      document.getElementById("historyBack").disabled = currentHistoryIndex <= 0;
+      document.getElementById("historyForward").disabled = currentHistoryIndex < 0 || currentHistoryIndex >= documentHistory.length - 1;
+      document.getElementById("historyFile").textContent = entry?.fileName || currentFileName;
+      document.getElementById("historyFile").title = entry?.fileName || currentFileName;
+      document.getElementById("historyPosition").textContent = documentHistory.length ? `${currentHistoryIndex + 1} из ${documentHistory.length}` : "0 из 0";
+    }
+
+    async function addDocumentToHistory(doc, rawText, fileName) {
+      if (currentHistoryIndex < documentHistory.length - 1) {
+        documentHistory.splice(currentHistoryIndex + 1);
+      }
+      documentHistory.push({ doc, rawText, fileName });
+      if (documentHistory.length > MAX_HISTORY_ITEMS) documentHistory.shift();
+      currentHistoryIndex = documentHistory.length - 1;
+      await renderDocument(doc, rawText, fileName);
+    }
+
+    async function navigateHistory(delta) {
+      const nextIndex = currentHistoryIndex + delta;
+      if (nextIndex < 0 || nextIndex >= documentHistory.length) return;
+      currentHistoryIndex = nextIndex;
+      const entry = documentHistory[currentHistoryIndex];
+      document.getElementById("searchInput").value = "";
+      await renderDocument(entry.doc, entry.rawText, entry.fileName);
+      showToast(`Открыт «${entry.fileName}»`);
+    }
+
+    document.getElementById("historyBack").addEventListener("click", () => navigateHistory(-1));
+    document.getElementById("historyForward").addEventListener("click", () => navigateHistory(1));
+
     function handleFile(file) {
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = async (e) => {
         try {
           const text = e.target.result;
           const json = JSON.parse(text);
-          renderDocument(json, text);
+          if (!isSupportedDocument(json)) throw new Error("нужны три колонки и массив items");
+          await addDocumentToHistory(json, text, file.name);
           showToast(`Файл «${file.name}» успешно загружен`);
         } catch (err) {
           alert("Ошибка парсинга JSON файла: " + err.message);
@@ -794,6 +988,7 @@
     document.getElementById("fileInput").addEventListener("change", (e) => {
       if (e.target.files.length > 0) {
         handleFile(e.target.files[0]);
+        e.target.value = "";
       }
     });
 
@@ -1096,7 +1291,7 @@
       if (window.ACTIVE_PARALLELDOC && window.ACTIVE_PARALLELDOC.items && Array.isArray(window.ACTIVE_PARALLELDOC.items)) {
         // Используем точный исходный текст файла без ресериализации, гарантируя совпадение SHA-256
         const rawText = window.ACTIVE_PARALLELDOC_RAW || JSON.stringify(window.ACTIVE_PARALLELDOC, null, 2);
-        await renderDocument(window.ACTIVE_PARALLELDOC, rawText);
+        await addDocumentToHistory(window.ACTIVE_PARALLELDOC, rawText, "active_document.json");
         return;
       }
 
@@ -1107,7 +1302,7 @@
           const rawText = await resp.text();
           const doc = JSON.parse(rawText);
           if (doc && doc.items && Array.isArray(doc.items)) {
-            await renderDocument(doc, rawText);
+            await addDocumentToHistory(doc, rawText, "active_document.json");
             return;
           }
         }
@@ -1115,7 +1310,7 @@
         console.log("active_document.json не обнаружен или доступ ограничен, загружен пилот:", err);
       }
       // 3. Фолбэк на встроенный канонический пилот
-      await renderDocument(DEFAULT_DOCUMENT, DEFAULT_DOCUMENT_RAW);
+      await addDocumentToHistory(DEFAULT_DOCUMENT, DEFAULT_DOCUMENT_RAW, "Демонстрационный документ");
     }
 
 
