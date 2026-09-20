@@ -1,0 +1,73 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "m-21",
+    "revision": "rev-1",
+    "title": "Dimension Side Budget Exceeded",
+    "author_refs": [
+      "auth-m-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-m-01",
+      "kind": "tool",
+      "name": "Media Contract Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-m-01",
+      "kind": "source",
+      "title": "Media Demonstration Clause",
+      "text": "Clause referencing test raster assets.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-m-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [
+        "ast-21"
+      ],
+      "provenance": {
+        "label": "Media Spec v3"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-m-01",
+      "title": "Media Test Group",
+      "unit_refs": [
+        "u-m-01"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [
+    {
+      "id": "ast-21",
+      "mime": "image/png",
+      "sha256": "be8e02e888c1889a7c3de54f86c9740e63b97f9fb575f3cce702038d1900cfe8",
+      "byte_length": 492,
+      "width": 9000,
+      "height": 100,
+      "alt": "9000px side image",
+      "caption": "Error Card 21",
+      "author_refs": [
+        "auth-m-01"
+      ],
+      "locator": {
+        "mode": "embedded",
+        "data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAACMCAYAAABCtSQoAAABs0lEQVR4nO3TMQ0AIBDAQJSgGcePBxbS5Ibbu3TtMwM0rd8BwDsDQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHsAooGw4NNGUREAAAAAElFTkSuQmCC"
+      },
+      "provenance": {
+        "label": "Media Spec v3"
+      }
+    }
+  ],
+  "profiles": []
+}

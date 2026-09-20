@@ -1,0 +1,73 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "m-04",
+    "revision": "rev-1",
+    "title": "Valid WebP VP8L Asset",
+    "author_refs": [
+      "auth-m-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-m-01",
+      "kind": "tool",
+      "name": "Media Contract Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-m-01",
+      "kind": "source",
+      "title": "Media Demonstration Clause",
+      "text": "Clause referencing test raster assets.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-m-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [
+        "ast-04"
+      ],
+      "provenance": {
+        "label": "Media Spec v3"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-m-01",
+      "title": "Media Test Group",
+      "unit_refs": [
+        "u-m-01"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [
+    {
+      "id": "ast-04",
+      "mime": "image/webp",
+      "sha256": "702ad7766b6dd3b0617f8beff67a1ceca8f1173b3d45d70c11e75aceea14b8e3",
+      "byte_length": 34,
+      "width": 100,
+      "height": 100,
+      "alt": "Valid test WebP VP8L thumbnail",
+      "caption": "Figure 4: Valid WebP VP8L",
+      "author_refs": [
+        "auth-m-01"
+      ],
+      "locator": {
+        "mode": "embedded",
+        "data_uri": "data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA4AAAAvY8AYAAAAAAAAAAAAAA=="
+      },
+      "provenance": {
+        "label": "Media Spec v3"
+      }
+    }
+  ],
+  "profiles": []
+}

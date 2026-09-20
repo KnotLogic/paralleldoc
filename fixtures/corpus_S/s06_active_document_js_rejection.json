@@ -1,0 +1,50 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "doc-sec-06-active-doc",
+    "revision": "rev-1",
+    "title": "Active Document JS Isolation Verification",
+    "author_refs": [
+      "auth-sec-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-sec-01",
+      "kind": "tool",
+      "name": "Security Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-sec-06",
+      "kind": "source",
+      "title": "Active Document Isolation",
+      "text": "Verifies that the viewer runtime never loads or executes active_document.js located in the same directory.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-sec-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "Spec §11 line 489"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-sec-06",
+      "title": "Active Doc Group",
+      "unit_refs": [
+        "u-sec-06"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": []
+}

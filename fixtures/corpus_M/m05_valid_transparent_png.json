@@ -1,0 +1,73 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "m-05",
+    "revision": "rev-1",
+    "title": "Valid Transparent PNG Asset",
+    "author_refs": [
+      "auth-m-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-m-01",
+      "kind": "tool",
+      "name": "Media Contract Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-m-01",
+      "kind": "source",
+      "title": "Media Demonstration Clause",
+      "text": "Clause referencing test raster assets.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-m-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [
+        "ast-05"
+      ],
+      "provenance": {
+        "label": "Media Spec v3"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-m-01",
+      "title": "Media Test Group",
+      "unit_refs": [
+        "u-m-01"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [
+    {
+      "id": "ast-05",
+      "mime": "image/png",
+      "sha256": "23e4d724f4bfc341ebca82d0a86de5563525ac3a4f3371235472e1d2eed3e6f2",
+      "byte_length": 119,
+      "width": 100,
+      "height": 100,
+      "alt": "Transparent PNG with alpha=0",
+      "caption": "Figure 5: Transparent PNG",
+      "author_refs": [
+        "auth-m-01"
+      ],
+      "locator": {
+        "mode": "embedded",
+        "data_uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAPklEQVR4nO3BMQEAAADCoPVPbQsvoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKcBnKQAAaZ1lY4AAAAASUVORK5CYII="
+      },
+      "provenance": {
+        "label": "Media Spec v3"
+      }
+    }
+  ],
+  "profiles": []
+}

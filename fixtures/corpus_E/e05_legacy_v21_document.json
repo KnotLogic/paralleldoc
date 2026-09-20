@@ -1,0 +1,26 @@
+{
+  "$schema": "https://antigravity.local/schemas/cockpit-v1.json",
+  "metadata": {
+    "title": "Legacy v2.1 Document",
+    "document_id": "legacy-doc-01"
+  },
+  "columns": [
+    {
+      "key": "col1",
+      "title": "Original Clause",
+      "width_weight": 50
+    },
+    {
+      "key": "col2",
+      "title": "Translation",
+      "width_weight": 50
+    }
+  ],
+  "items": [
+    {
+      "id": "1",
+      "col1": "Original source text",
+      "col2": "Translated text"
+    }
+  ]
+}

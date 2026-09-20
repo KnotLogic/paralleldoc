@@ -1,0 +1,73 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "m-07",
+    "revision": "rev-1",
+    "title": "Corrupted Base64",
+    "author_refs": [
+      "auth-m-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-m-01",
+      "kind": "tool",
+      "name": "Media Contract Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-m-01",
+      "kind": "source",
+      "title": "Media Demonstration Clause",
+      "text": "Clause referencing test raster assets.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-m-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [
+        "ast-07"
+      ],
+      "provenance": {
+        "label": "Media Spec v3"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-m-01",
+      "title": "Media Test Group",
+      "unit_refs": [
+        "u-m-01"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [
+    {
+      "id": "ast-07",
+      "mime": "image/png",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "byte_length": 100,
+      "width": 100,
+      "height": 100,
+      "alt": "Corrupted Base64 syntax",
+      "caption": "Error Card 07",
+      "author_refs": [
+        "auth-m-01"
+      ],
+      "locator": {
+        "mode": "embedded",
+        "data_uri": "data:image/png;base64,iVBORw0KGgo%%%INVALID_CHARS%%%"
+      },
+      "provenance": {
+        "label": "Media Spec v3"
+      }
+    }
+  ],
+  "profiles": []
+}

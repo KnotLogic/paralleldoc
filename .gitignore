@@ -26,3 +26,15 @@ Desktop.ini
 .idea/
 *.sublime-project
 *.sublime-workspace
+
+# Agent Coordination Metadata & Transient Progress
+.agents/
+teamwork_progress.md
+
+# Test & Coverage Caches
+.pytest_cache/
+.coverage
+htmlcov/
+.hypothesis/
+test-results/
+

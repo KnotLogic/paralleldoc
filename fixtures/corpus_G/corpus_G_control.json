@@ -1,0 +1,334 @@
+{
+  "document": {
+    "file": "corpus_G_sla_document.json",
+    "sha256": "558fe436490edf9e64d46a112ce90905903290ddd4e954ea5eae8d5388fd61e0",
+    "bytes": 49762,
+    "groups_count": 12,
+    "units_count": 24,
+    "nodes_count": 8,
+    "edges_count": 9,
+    "assets_count": 3,
+    "long_quote_chars": 11982
+  },
+  "semantic_deductions": {
+    "preliminary_conclusion": {
+      "unit_id": "u-09",
+      "node_id": "node-prelim-compl",
+      "text_snippet": "Предварительное соответствие SLA 99.95%"
+    },
+    "premises": [
+      {
+        "unit_id": "u-02",
+        "node_id": "node-multi-az",
+        "label": "Архитектура Multi-AZ",
+        "edge_id": "edge-01",
+        "relation": "supports"
+      },
+      {
+        "unit_id": "u-03",
+        "node_id": "node-uptime-claim",
+        "label": "Заявление провайдера об историческом аптайме 99.99%",
+        "edge_id": "edge-02",
+        "relation": "supports"
+      }
+    ],
+    "critical_qualification": {
+      "unit_id": "u-04",
+      "node_id": "node-maint-clause",
+      "edge_id": "edge-03",
+      "relation": "qualifies",
+      "target_node_id": "node-prelim-compl",
+      "reasoning": "Исключение регламентных окон обслуживания ослабляет вывод: без проверки журналов плановых работ заявление 99.99% не является доказательством надёжности."
+    },
+    "recommended_action": {
+      "unit_id": "u-11",
+      "node_id": "node-method-request",
+      "edge_id": "edge-06",
+      "relation": "depends_on",
+      "action_summary": "Запросить подробную методику расчета доступности и исходные журналы регламентных окон."
+    },
+    "why_claim_is_not_proof": "Заявление 99.99% не является строгим доказательством, поскольку регламентные работы вычитаются из знаменателя времени расчета, и без первичных журналов невозможно исключить сокрытие аварийных простоев под видом планового техобслуживания."
+  },
+  "cross_highlighting": {
+    "node_to_units": {
+      "node-sla-req": [
+        "u-01"
+      ],
+      "node-multi-az": [
+        "u-02"
+      ],
+      "node-uptime-claim": [
+        "u-03"
+      ],
+      "node-maint-clause": [
+        "u-04"
+      ],
+      "node-meas-window": [
+        "u-07"
+      ],
+      "node-prelim-compl": [
+        "u-09"
+      ],
+      "node-method-request": [
+        "u-11"
+      ],
+      "node-audit-prep": [
+        "u-12"
+      ]
+    },
+    "edge_to_units": {
+      "edge-01": [
+        "u-02",
+        "u-09"
+      ],
+      "edge-02": [
+        "u-03",
+        "u-09"
+      ],
+      "edge-03": [
+        "u-04",
+        "u-09",
+        "u-10"
+      ],
+      "edge-04": [
+        "u-07",
+        "u-03"
+      ],
+      "edge-05": [
+        "u-04",
+        "u-03",
+        "u-08"
+      ],
+      "edge-06": [
+        "u-09",
+        "u-11"
+      ],
+      "edge-07": [
+        "u-11",
+        "u-12"
+      ],
+      "edge-08": [
+        "u-01",
+        "u-03"
+      ],
+      "edge-09": [
+        "u-12",
+        "u-11"
+      ]
+    },
+    "unit_to_graph": {
+      "u-01": {
+        "nodes": [
+          "node-sla-req"
+        ],
+        "edges": [
+          "edge-08"
+        ]
+      },
+      "u-02": {
+        "nodes": [
+          "node-multi-az"
+        ],
+        "edges": [
+          "edge-01"
+        ]
+      },
+      "u-03": {
+        "nodes": [
+          "node-uptime-claim"
+        ],
+        "edges": [
+          "edge-02",
+          "edge-04",
+          "edge-05",
+          "edge-08"
+        ]
+      },
+      "u-04": {
+        "nodes": [
+          "node-maint-clause"
+        ],
+        "edges": [
+          "edge-03",
+          "edge-05"
+        ]
+      },
+      "u-07": {
+        "nodes": [
+          "node-meas-window"
+        ],
+        "edges": [
+          "edge-04"
+        ]
+      },
+      "u-09": {
+        "nodes": [
+          "node-prelim-compl"
+        ],
+        "edges": [
+          "edge-01",
+          "edge-02",
+          "edge-03",
+          "edge-06"
+        ]
+      },
+      "u-11": {
+        "nodes": [
+          "node-method-request"
+        ],
+        "edges": [
+          "edge-06",
+          "edge-07",
+          "edge-09"
+        ]
+      },
+      "u-12": {
+        "nodes": [
+          "node-audit-prep"
+        ],
+        "edges": [
+          "edge-07",
+          "edge-09"
+        ]
+      }
+    },
+    "dual_conclusion_test": {
+      "source_unit": "u-03",
+      "connected_edges": [
+        "edge-02",
+        "edge-08"
+      ],
+      "connected_targets": [
+        "node-prelim-compl",
+        "node-sla-req"
+      ]
+    }
+  },
+  "navigation_jump_targets": [
+    {
+      "target": "u-05",
+      "description": "Длинная цитата договора (>8000 символов, автоматическое раскрытие)"
+    },
+    {
+      "target": "u-12",
+      "description": "Нижний блок действий (планирование аудита)"
+    },
+    {
+      "target": "u-02",
+      "description": "Модель Multi-AZ с растровой схемой ast-g-01"
+    },
+    {
+      "target": "u-06",
+      "description": "Галерея из 3 растровых вложений"
+    },
+    {
+      "target": "u-04",
+      "description": "Пункт договора об исключении ТО"
+    },
+    {
+      "target": "u-07",
+      "description": "Анализ окна измерений провайдера"
+    },
+    {
+      "target": "u-09",
+      "description": "Предварительный вывод о соответствии"
+    },
+    {
+      "target": "u-11",
+      "description": "Рекомендуемое действие (запрос логов)"
+    },
+    {
+      "target": "u-01",
+      "description": "Первое требование SLA 99.95%"
+    },
+    {
+      "target": "u-03",
+      "description": "Декларация исторического аптайма 99.99%"
+    }
+  ],
+  "literal_search_queries": [
+    {
+      "query": "99.95%",
+      "expected_units": [
+        "u-01",
+        "u-01b",
+        "u-03b",
+        "u-09"
+      ],
+      "description": "Спецификация SLA"
+    },
+    {
+      "query": "Multi-AZ",
+      "expected_units": [
+        "u-02",
+        "u-02b",
+        "u-09"
+      ],
+      "description": "Архитектурный термин"
+    },
+    {
+      "query": "РЕГЛАМЕНТНЫЙ_МАРКЕР_7749",
+      "expected_units": [
+        "u-05"
+      ],
+      "description": "Уникальный токен в середине длинной цитаты"
+    },
+    {
+      "query": "48 часов",
+      "expected_units": [
+        "u-01",
+        "u-05"
+      ],
+      "description": "Срок анонсирования плановых окон"
+    },
+    {
+      "query": "21.6 минут",
+      "expected_units": [
+        "u-01b",
+        "u-03b"
+      ],
+      "description": "Числовое значение предельного простоя"
+    },
+    {
+      "query": "failover",
+      "expected_units": [
+        "u-02"
+      ],
+      "description": "Технический термин времени переключения"
+    },
+    {
+      "query": "ast-g-01",
+      "expected_units": [
+        "u-02",
+        "u-06",
+        "u-06b"
+      ],
+      "description": "Идентификатор ассета схемы"
+    },
+    {
+      "query": "Статья 5.2",
+      "expected_units": [
+        "u-05",
+        "u-05b"
+      ],
+      "description": "Нормативная ссылка договора"
+    },
+    {
+      "query": "бремя доказывания",
+      "expected_units": [
+        "u-05",
+        "u-05b"
+      ],
+      "description": "Юридический термин"
+    },
+    {
+      "query": "независимый аудит",
+      "expected_units": [
+        "u-10",
+        "u-12",
+        "u-12b"
+      ],
+      "description": "Эскалационное действие"
+    }
+  ]
+}

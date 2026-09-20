@@ -1,0 +1,24 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "v-doc-01-minimal",
+    "revision": "rev-1",
+    "title": "Corpus V01 Minimal Empty Document",
+    "author_refs": [
+      "auth-v-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-v-01",
+      "kind": "human",
+      "name": "V Author"
+    }
+  ],
+  "units": [],
+  "groups": [],
+  "visuals": [],
+  "assets": [],
+  "profiles": []
+}

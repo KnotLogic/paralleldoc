@@ -1,0 +1,67 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "v-doc-04-mixed-formats",
+    "revision": "rev-1",
+    "title": "Corpus V04 Mixed Plain and Markdown Formats",
+    "author_refs": [
+      "auth-v-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-v-01",
+      "kind": "human",
+      "name": "Format Specialist"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-plain-01",
+      "kind": "source",
+      "title": "Plain Text Source with Indents",
+      "text": "def calculate_uptime(total_seconds, downtime_seconds):\n    ratio = (total_seconds - downtime_seconds) / total_seconds\n    return ratio >= 0.9995",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "reported",
+      "status": "done",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "source_code.py:12"
+      }
+    },
+    {
+      "id": "u-md-01",
+      "kind": "analysis",
+      "title": "Markdown Safe Analysis Unit",
+      "text": "### Вывод анализа\n\n- **Архитектура:** Multi-AZ с резервированием\n- **Надёжность:** *99.99% исторический показатель*\n- `MTTR <= 45s` при аварийном переключении",
+      "text_format": "markdown-safe",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "supported",
+      "status": "reviewed",
+      "source_refs": [
+        "u-plain-01"
+      ],
+      "asset_ids": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-fmt-01",
+      "title": "Format Test Group",
+      "unit_refs": [
+        "u-plain-01",
+        "u-md-01"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": []
+}

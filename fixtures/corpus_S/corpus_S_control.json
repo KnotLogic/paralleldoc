@@ -1,0 +1,44 @@
+[
+  {
+    "file": "s01_xss_script_tags.json",
+    "bytes": 1203,
+    "sha256": "f428fd8880a9baaf1a6e4392d9541541193f9676795edf689c83d1a812965884",
+    "vector": "SCRIPT_TAGS",
+    "expected_protection": "Strict textContent escaping; 0 script execution"
+  },
+  {
+    "file": "s02_html_event_handlers.json",
+    "bytes": 1036,
+    "sha256": "4f53e4a87c4dacf254cd4ede7d054f1b199f4367ee0d8233d740d474e0a553c1",
+    "vector": "EVENT_HANDLERS",
+    "expected_protection": "HTML sanitization / escaping; handlers neutralized"
+  },
+  {
+    "file": "s03_javascript_and_file_locators.json",
+    "bytes": 2551,
+    "sha256": "09dc944cded56138c446a7cf80f4a094400701260a822d91aa723b0c8e7a7c41",
+    "vector": "LOCATOR_SCHEMES",
+    "expected_protection": "AssetLocatorGuard rejects javascript:, file:, UNC paths"
+  },
+  {
+    "file": "s04_markdown_injection.json",
+    "bytes": 1057,
+    "sha256": "91b2f507ab016cb4bd610630951a89e6e9aa08057d4b8a1eeea5b746aa645152",
+    "vector": "MARKDOWN_EXFIL",
+    "expected_protection": "CSP connect-src/img-src 'none'; javascript: link protocol blocked"
+  },
+  {
+    "file": "s05_namespaced_extension_payload.json",
+    "bytes": 1221,
+    "sha256": "01077a8a7cc0344482eb6cb34e13b8dc330639db8a519b8427d1eb6724f5951d",
+    "vector": "PROTOTYPE_POLLUTION",
+    "expected_protection": "Object.create(null) / safe property access; Object prototype untouched"
+  },
+  {
+    "file": "s06_active_document_js_rejection.json",
+    "bytes": 1051,
+    "sha256": "2c766177cd1736df2c78a49a2c5681b42db632f9ff19d96d42cf946dc0d4034d",
+    "vector": "ACTIVE_DOCUMENT_JS",
+    "expected_protection": "active_document.js never loaded; 0 external scripts evaluated"
+  }
+]

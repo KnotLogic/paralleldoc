@@ -1,0 +1,5498 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "doc-graph-201n-401e",
+    "revision": "rev-1.0",
+    "title": "Граф с превышением лимита (201n / 401e)",
+    "author_refs": [
+      "auth-scale-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-scale-01",
+      "kind": "tool",
+      "name": "Scale Limit Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-scale-src",
+      "kind": "source",
+      "title": "Исходные требования к масштабируемости графа",
+      "text": "Тестирование масштабируемости графа связей на границе 201 узлов и 401 рёбер.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-scale-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "Spec §6, §11"
+      }
+    },
+    {
+      "id": "u-scale-mod",
+      "kind": "model",
+      "title": "Модель масштабирования графа",
+      "text": "Модель содержит граф размером 201 узлов и 401 рёбер.",
+      "text_format": "markdown-safe",
+      "author_refs": [
+        "auth-scale-01"
+      ],
+      "epistemic": "hypothesis",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-scale-01",
+      "title": "Группа масштабируемости (201n / 401e)",
+      "unit_refs": [
+        "u-scale-src",
+        "u-scale-mod"
+      ]
+    }
+  ],
+  "visuals": [
+    {
+      "id": "vis-scale-test",
+      "type": "relationship-graph",
+      "title": "Граф масштабирования (201 узлов / 401 рёбер)",
+      "question": "Превышен ли лимит масштабирования графа?",
+      "fallback": "Таблица всех 401 связей между 201 узлами.",
+      "owner_unit_id": "u-scale-mod",
+      "author_refs": [
+        "auth-scale-01"
+      ],
+      "nodes": [
+        {
+          "id": "n-000",
+          "label": "Node 000",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-001",
+          "label": "Node 001",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-002",
+          "label": "Node 002",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-003",
+          "label": "Node 003",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-004",
+          "label": "Node 004",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-005",
+          "label": "Node 005",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-006",
+          "label": "Node 006",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-007",
+          "label": "Node 007",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-008",
+          "label": "Node 008",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-009",
+          "label": "Node 009",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-010",
+          "label": "Node 010",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-011",
+          "label": "Node 011",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-012",
+          "label": "Node 012",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-013",
+          "label": "Node 013",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-014",
+          "label": "Node 014",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-015",
+          "label": "Node 015",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-016",
+          "label": "Node 016",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-017",
+          "label": "Node 017",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-018",
+          "label": "Node 018",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-019",
+          "label": "Node 019",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-020",
+          "label": "Node 020",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-021",
+          "label": "Node 021",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-022",
+          "label": "Node 022",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-023",
+          "label": "Node 023",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-024",
+          "label": "Node 024",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-025",
+          "label": "Node 025",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-026",
+          "label": "Node 026",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-027",
+          "label": "Node 027",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-028",
+          "label": "Node 028",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-029",
+          "label": "Node 029",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-030",
+          "label": "Node 030",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-031",
+          "label": "Node 031",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-032",
+          "label": "Node 032",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-033",
+          "label": "Node 033",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-034",
+          "label": "Node 034",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-035",
+          "label": "Node 035",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-036",
+          "label": "Node 036",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-037",
+          "label": "Node 037",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-038",
+          "label": "Node 038",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-039",
+          "label": "Node 039",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-040",
+          "label": "Node 040",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-041",
+          "label": "Node 041",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-042",
+          "label": "Node 042",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-043",
+          "label": "Node 043",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-044",
+          "label": "Node 044",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-045",
+          "label": "Node 045",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-046",
+          "label": "Node 046",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-047",
+          "label": "Node 047",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-048",
+          "label": "Node 048",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-049",
+          "label": "Node 049",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-050",
+          "label": "Node 050",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-051",
+          "label": "Node 051",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-052",
+          "label": "Node 052",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-053",
+          "label": "Node 053",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-054",
+          "label": "Node 054",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-055",
+          "label": "Node 055",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-056",
+          "label": "Node 056",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-057",
+          "label": "Node 057",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-058",
+          "label": "Node 058",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-059",
+          "label": "Node 059",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-060",
+          "label": "Node 060",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-061",
+          "label": "Node 061",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-062",
+          "label": "Node 062",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-063",
+          "label": "Node 063",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-064",
+          "label": "Node 064",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-065",
+          "label": "Node 065",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-066",
+          "label": "Node 066",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-067",
+          "label": "Node 067",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-068",
+          "label": "Node 068",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-069",
+          "label": "Node 069",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-070",
+          "label": "Node 070",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-071",
+          "label": "Node 071",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-072",
+          "label": "Node 072",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-073",
+          "label": "Node 073",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-074",
+          "label": "Node 074",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-075",
+          "label": "Node 075",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-076",
+          "label": "Node 076",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-077",
+          "label": "Node 077",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-078",
+          "label": "Node 078",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-079",
+          "label": "Node 079",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-080",
+          "label": "Node 080",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-081",
+          "label": "Node 081",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-082",
+          "label": "Node 082",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-083",
+          "label": "Node 083",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-084",
+          "label": "Node 084",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-085",
+          "label": "Node 085",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-086",
+          "label": "Node 086",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-087",
+          "label": "Node 087",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-088",
+          "label": "Node 088",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-089",
+          "label": "Node 089",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-090",
+          "label": "Node 090",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-091",
+          "label": "Node 091",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-092",
+          "label": "Node 092",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-093",
+          "label": "Node 093",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-094",
+          "label": "Node 094",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-095",
+          "label": "Node 095",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-096",
+          "label": "Node 096",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-097",
+          "label": "Node 097",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-098",
+          "label": "Node 098",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-099",
+          "label": "Node 099",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-100",
+          "label": "Node 100",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-101",
+          "label": "Node 101",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-102",
+          "label": "Node 102",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-103",
+          "label": "Node 103",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-104",
+          "label": "Node 104",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-105",
+          "label": "Node 105",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-106",
+          "label": "Node 106",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-107",
+          "label": "Node 107",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-108",
+          "label": "Node 108",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-109",
+          "label": "Node 109",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-110",
+          "label": "Node 110",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-111",
+          "label": "Node 111",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-112",
+          "label": "Node 112",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-113",
+          "label": "Node 113",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-114",
+          "label": "Node 114",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-115",
+          "label": "Node 115",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-116",
+          "label": "Node 116",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-117",
+          "label": "Node 117",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-118",
+          "label": "Node 118",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-119",
+          "label": "Node 119",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-120",
+          "label": "Node 120",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-121",
+          "label": "Node 121",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-122",
+          "label": "Node 122",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-123",
+          "label": "Node 123",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-124",
+          "label": "Node 124",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-125",
+          "label": "Node 125",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-126",
+          "label": "Node 126",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-127",
+          "label": "Node 127",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-128",
+          "label": "Node 128",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-129",
+          "label": "Node 129",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-130",
+          "label": "Node 130",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-131",
+          "label": "Node 131",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-132",
+          "label": "Node 132",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-133",
+          "label": "Node 133",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-134",
+          "label": "Node 134",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-135",
+          "label": "Node 135",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-136",
+          "label": "Node 136",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-137",
+          "label": "Node 137",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-138",
+          "label": "Node 138",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-139",
+          "label": "Node 139",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-140",
+          "label": "Node 140",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-141",
+          "label": "Node 141",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-142",
+          "label": "Node 142",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-143",
+          "label": "Node 143",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-144",
+          "label": "Node 144",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-145",
+          "label": "Node 145",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-146",
+          "label": "Node 146",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-147",
+          "label": "Node 147",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-148",
+          "label": "Node 148",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-149",
+          "label": "Node 149",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-150",
+          "label": "Node 150",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-151",
+          "label": "Node 151",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-152",
+          "label": "Node 152",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-153",
+          "label": "Node 153",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-154",
+          "label": "Node 154",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-155",
+          "label": "Node 155",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-156",
+          "label": "Node 156",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-157",
+          "label": "Node 157",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-158",
+          "label": "Node 158",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-159",
+          "label": "Node 159",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-160",
+          "label": "Node 160",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-161",
+          "label": "Node 161",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-162",
+          "label": "Node 162",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-163",
+          "label": "Node 163",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-164",
+          "label": "Node 164",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-165",
+          "label": "Node 165",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-166",
+          "label": "Node 166",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-167",
+          "label": "Node 167",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-168",
+          "label": "Node 168",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-169",
+          "label": "Node 169",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-170",
+          "label": "Node 170",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-171",
+          "label": "Node 171",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-172",
+          "label": "Node 172",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-173",
+          "label": "Node 173",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-174",
+          "label": "Node 174",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-175",
+          "label": "Node 175",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-176",
+          "label": "Node 176",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-177",
+          "label": "Node 177",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-178",
+          "label": "Node 178",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-179",
+          "label": "Node 179",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-180",
+          "label": "Node 180",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-181",
+          "label": "Node 181",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-182",
+          "label": "Node 182",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-183",
+          "label": "Node 183",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-184",
+          "label": "Node 184",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-185",
+          "label": "Node 185",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-186",
+          "label": "Node 186",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-187",
+          "label": "Node 187",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-188",
+          "label": "Node 188",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-189",
+          "label": "Node 189",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-190",
+          "label": "Node 190",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-191",
+          "label": "Node 191",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-192",
+          "label": "Node 192",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-193",
+          "label": "Node 193",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-194",
+          "label": "Node 194",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-195",
+          "label": "Node 195",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-196",
+          "label": "Node 196",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-197",
+          "label": "Node 197",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-198",
+          "label": "Node 198",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "n-199",
+          "label": "Node 199",
+          "unit_refs": [
+            "u-scale-mod"
+          ]
+        },
+        {
+          "id": "n-200",
+          "label": "Node 200",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-000",
+          "from": "n-000",
+          "to": "n-001",
+          "relation": "supports",
+          "label": "Rel 000",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-001",
+          "from": "n-001",
+          "to": "n-002",
+          "relation": "qualifies",
+          "label": "Rel 001",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-002",
+          "from": "n-002",
+          "to": "n-003",
+          "relation": "contradicts",
+          "label": "Rel 002",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-003",
+          "from": "n-003",
+          "to": "n-004",
+          "relation": "depends_on",
+          "label": "Rel 003",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-004",
+          "from": "n-004",
+          "to": "n-005",
+          "relation": "precedes",
+          "label": "Rel 004",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-005",
+          "from": "n-005",
+          "to": "n-006",
+          "relation": "compares",
+          "label": "Rel 005",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-006",
+          "from": "n-006",
+          "to": "n-007",
+          "relation": "supports",
+          "label": "Rel 006",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-007",
+          "from": "n-007",
+          "to": "n-008",
+          "relation": "qualifies",
+          "label": "Rel 007",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-008",
+          "from": "n-008",
+          "to": "n-009",
+          "relation": "contradicts",
+          "label": "Rel 008",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-009",
+          "from": "n-009",
+          "to": "n-010",
+          "relation": "depends_on",
+          "label": "Rel 009",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-010",
+          "from": "n-010",
+          "to": "n-011",
+          "relation": "precedes",
+          "label": "Rel 010",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-011",
+          "from": "n-011",
+          "to": "n-012",
+          "relation": "compares",
+          "label": "Rel 011",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-012",
+          "from": "n-012",
+          "to": "n-013",
+          "relation": "supports",
+          "label": "Rel 012",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-013",
+          "from": "n-013",
+          "to": "n-014",
+          "relation": "qualifies",
+          "label": "Rel 013",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-014",
+          "from": "n-014",
+          "to": "n-015",
+          "relation": "contradicts",
+          "label": "Rel 014",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-015",
+          "from": "n-015",
+          "to": "n-016",
+          "relation": "depends_on",
+          "label": "Rel 015",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-016",
+          "from": "n-016",
+          "to": "n-017",
+          "relation": "precedes",
+          "label": "Rel 016",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-017",
+          "from": "n-017",
+          "to": "n-018",
+          "relation": "compares",
+          "label": "Rel 017",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-018",
+          "from": "n-018",
+          "to": "n-019",
+          "relation": "supports",
+          "label": "Rel 018",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-019",
+          "from": "n-019",
+          "to": "n-020",
+          "relation": "qualifies",
+          "label": "Rel 019",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-020",
+          "from": "n-020",
+          "to": "n-021",
+          "relation": "contradicts",
+          "label": "Rel 020",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-021",
+          "from": "n-021",
+          "to": "n-022",
+          "relation": "depends_on",
+          "label": "Rel 021",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-022",
+          "from": "n-022",
+          "to": "n-023",
+          "relation": "precedes",
+          "label": "Rel 022",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-023",
+          "from": "n-023",
+          "to": "n-024",
+          "relation": "compares",
+          "label": "Rel 023",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-024",
+          "from": "n-024",
+          "to": "n-025",
+          "relation": "supports",
+          "label": "Rel 024",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-025",
+          "from": "n-025",
+          "to": "n-026",
+          "relation": "qualifies",
+          "label": "Rel 025",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-026",
+          "from": "n-026",
+          "to": "n-027",
+          "relation": "contradicts",
+          "label": "Rel 026",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-027",
+          "from": "n-027",
+          "to": "n-028",
+          "relation": "depends_on",
+          "label": "Rel 027",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-028",
+          "from": "n-028",
+          "to": "n-029",
+          "relation": "precedes",
+          "label": "Rel 028",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-029",
+          "from": "n-029",
+          "to": "n-030",
+          "relation": "compares",
+          "label": "Rel 029",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-030",
+          "from": "n-030",
+          "to": "n-031",
+          "relation": "supports",
+          "label": "Rel 030",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-031",
+          "from": "n-031",
+          "to": "n-032",
+          "relation": "qualifies",
+          "label": "Rel 031",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-032",
+          "from": "n-032",
+          "to": "n-033",
+          "relation": "contradicts",
+          "label": "Rel 032",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-033",
+          "from": "n-033",
+          "to": "n-034",
+          "relation": "depends_on",
+          "label": "Rel 033",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-034",
+          "from": "n-034",
+          "to": "n-035",
+          "relation": "precedes",
+          "label": "Rel 034",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-035",
+          "from": "n-035",
+          "to": "n-036",
+          "relation": "compares",
+          "label": "Rel 035",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-036",
+          "from": "n-036",
+          "to": "n-037",
+          "relation": "supports",
+          "label": "Rel 036",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-037",
+          "from": "n-037",
+          "to": "n-038",
+          "relation": "qualifies",
+          "label": "Rel 037",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-038",
+          "from": "n-038",
+          "to": "n-039",
+          "relation": "contradicts",
+          "label": "Rel 038",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-039",
+          "from": "n-039",
+          "to": "n-040",
+          "relation": "depends_on",
+          "label": "Rel 039",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-040",
+          "from": "n-040",
+          "to": "n-041",
+          "relation": "precedes",
+          "label": "Rel 040",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-041",
+          "from": "n-041",
+          "to": "n-042",
+          "relation": "compares",
+          "label": "Rel 041",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-042",
+          "from": "n-042",
+          "to": "n-043",
+          "relation": "supports",
+          "label": "Rel 042",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-043",
+          "from": "n-043",
+          "to": "n-044",
+          "relation": "qualifies",
+          "label": "Rel 043",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-044",
+          "from": "n-044",
+          "to": "n-045",
+          "relation": "contradicts",
+          "label": "Rel 044",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-045",
+          "from": "n-045",
+          "to": "n-046",
+          "relation": "depends_on",
+          "label": "Rel 045",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-046",
+          "from": "n-046",
+          "to": "n-047",
+          "relation": "precedes",
+          "label": "Rel 046",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-047",
+          "from": "n-047",
+          "to": "n-048",
+          "relation": "compares",
+          "label": "Rel 047",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-048",
+          "from": "n-048",
+          "to": "n-049",
+          "relation": "supports",
+          "label": "Rel 048",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-049",
+          "from": "n-049",
+          "to": "n-050",
+          "relation": "qualifies",
+          "label": "Rel 049",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-050",
+          "from": "n-050",
+          "to": "n-051",
+          "relation": "contradicts",
+          "label": "Rel 050",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-051",
+          "from": "n-051",
+          "to": "n-052",
+          "relation": "depends_on",
+          "label": "Rel 051",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-052",
+          "from": "n-052",
+          "to": "n-053",
+          "relation": "precedes",
+          "label": "Rel 052",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-053",
+          "from": "n-053",
+          "to": "n-054",
+          "relation": "compares",
+          "label": "Rel 053",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-054",
+          "from": "n-054",
+          "to": "n-055",
+          "relation": "supports",
+          "label": "Rel 054",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-055",
+          "from": "n-055",
+          "to": "n-056",
+          "relation": "qualifies",
+          "label": "Rel 055",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-056",
+          "from": "n-056",
+          "to": "n-057",
+          "relation": "contradicts",
+          "label": "Rel 056",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-057",
+          "from": "n-057",
+          "to": "n-058",
+          "relation": "depends_on",
+          "label": "Rel 057",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-058",
+          "from": "n-058",
+          "to": "n-059",
+          "relation": "precedes",
+          "label": "Rel 058",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-059",
+          "from": "n-059",
+          "to": "n-060",
+          "relation": "compares",
+          "label": "Rel 059",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-060",
+          "from": "n-060",
+          "to": "n-061",
+          "relation": "supports",
+          "label": "Rel 060",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-061",
+          "from": "n-061",
+          "to": "n-062",
+          "relation": "qualifies",
+          "label": "Rel 061",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-062",
+          "from": "n-062",
+          "to": "n-063",
+          "relation": "contradicts",
+          "label": "Rel 062",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-063",
+          "from": "n-063",
+          "to": "n-064",
+          "relation": "depends_on",
+          "label": "Rel 063",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-064",
+          "from": "n-064",
+          "to": "n-065",
+          "relation": "precedes",
+          "label": "Rel 064",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-065",
+          "from": "n-065",
+          "to": "n-066",
+          "relation": "compares",
+          "label": "Rel 065",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-066",
+          "from": "n-066",
+          "to": "n-067",
+          "relation": "supports",
+          "label": "Rel 066",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-067",
+          "from": "n-067",
+          "to": "n-068",
+          "relation": "qualifies",
+          "label": "Rel 067",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-068",
+          "from": "n-068",
+          "to": "n-069",
+          "relation": "contradicts",
+          "label": "Rel 068",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-069",
+          "from": "n-069",
+          "to": "n-070",
+          "relation": "depends_on",
+          "label": "Rel 069",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-070",
+          "from": "n-070",
+          "to": "n-071",
+          "relation": "precedes",
+          "label": "Rel 070",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-071",
+          "from": "n-071",
+          "to": "n-072",
+          "relation": "compares",
+          "label": "Rel 071",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-072",
+          "from": "n-072",
+          "to": "n-073",
+          "relation": "supports",
+          "label": "Rel 072",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-073",
+          "from": "n-073",
+          "to": "n-074",
+          "relation": "qualifies",
+          "label": "Rel 073",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-074",
+          "from": "n-074",
+          "to": "n-075",
+          "relation": "contradicts",
+          "label": "Rel 074",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-075",
+          "from": "n-075",
+          "to": "n-076",
+          "relation": "depends_on",
+          "label": "Rel 075",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-076",
+          "from": "n-076",
+          "to": "n-077",
+          "relation": "precedes",
+          "label": "Rel 076",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-077",
+          "from": "n-077",
+          "to": "n-078",
+          "relation": "compares",
+          "label": "Rel 077",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-078",
+          "from": "n-078",
+          "to": "n-079",
+          "relation": "supports",
+          "label": "Rel 078",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-079",
+          "from": "n-079",
+          "to": "n-080",
+          "relation": "qualifies",
+          "label": "Rel 079",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-080",
+          "from": "n-080",
+          "to": "n-081",
+          "relation": "contradicts",
+          "label": "Rel 080",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-081",
+          "from": "n-081",
+          "to": "n-082",
+          "relation": "depends_on",
+          "label": "Rel 081",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-082",
+          "from": "n-082",
+          "to": "n-083",
+          "relation": "precedes",
+          "label": "Rel 082",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-083",
+          "from": "n-083",
+          "to": "n-084",
+          "relation": "compares",
+          "label": "Rel 083",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-084",
+          "from": "n-084",
+          "to": "n-085",
+          "relation": "supports",
+          "label": "Rel 084",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-085",
+          "from": "n-085",
+          "to": "n-086",
+          "relation": "qualifies",
+          "label": "Rel 085",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-086",
+          "from": "n-086",
+          "to": "n-087",
+          "relation": "contradicts",
+          "label": "Rel 086",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-087",
+          "from": "n-087",
+          "to": "n-088",
+          "relation": "depends_on",
+          "label": "Rel 087",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-088",
+          "from": "n-088",
+          "to": "n-089",
+          "relation": "precedes",
+          "label": "Rel 088",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-089",
+          "from": "n-089",
+          "to": "n-090",
+          "relation": "compares",
+          "label": "Rel 089",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-090",
+          "from": "n-090",
+          "to": "n-091",
+          "relation": "supports",
+          "label": "Rel 090",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-091",
+          "from": "n-091",
+          "to": "n-092",
+          "relation": "qualifies",
+          "label": "Rel 091",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-092",
+          "from": "n-092",
+          "to": "n-093",
+          "relation": "contradicts",
+          "label": "Rel 092",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-093",
+          "from": "n-093",
+          "to": "n-094",
+          "relation": "depends_on",
+          "label": "Rel 093",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-094",
+          "from": "n-094",
+          "to": "n-095",
+          "relation": "precedes",
+          "label": "Rel 094",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-095",
+          "from": "n-095",
+          "to": "n-096",
+          "relation": "compares",
+          "label": "Rel 095",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-096",
+          "from": "n-096",
+          "to": "n-097",
+          "relation": "supports",
+          "label": "Rel 096",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-097",
+          "from": "n-097",
+          "to": "n-098",
+          "relation": "qualifies",
+          "label": "Rel 097",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-098",
+          "from": "n-098",
+          "to": "n-099",
+          "relation": "contradicts",
+          "label": "Rel 098",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-099",
+          "from": "n-099",
+          "to": "n-100",
+          "relation": "depends_on",
+          "label": "Rel 099",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-100",
+          "from": "n-100",
+          "to": "n-101",
+          "relation": "precedes",
+          "label": "Rel 100",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-101",
+          "from": "n-101",
+          "to": "n-102",
+          "relation": "compares",
+          "label": "Rel 101",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-102",
+          "from": "n-102",
+          "to": "n-103",
+          "relation": "supports",
+          "label": "Rel 102",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-103",
+          "from": "n-103",
+          "to": "n-104",
+          "relation": "qualifies",
+          "label": "Rel 103",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-104",
+          "from": "n-104",
+          "to": "n-105",
+          "relation": "contradicts",
+          "label": "Rel 104",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-105",
+          "from": "n-105",
+          "to": "n-106",
+          "relation": "depends_on",
+          "label": "Rel 105",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-106",
+          "from": "n-106",
+          "to": "n-107",
+          "relation": "precedes",
+          "label": "Rel 106",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-107",
+          "from": "n-107",
+          "to": "n-108",
+          "relation": "compares",
+          "label": "Rel 107",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-108",
+          "from": "n-108",
+          "to": "n-109",
+          "relation": "supports",
+          "label": "Rel 108",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-109",
+          "from": "n-109",
+          "to": "n-110",
+          "relation": "qualifies",
+          "label": "Rel 109",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-110",
+          "from": "n-110",
+          "to": "n-111",
+          "relation": "contradicts",
+          "label": "Rel 110",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-111",
+          "from": "n-111",
+          "to": "n-112",
+          "relation": "depends_on",
+          "label": "Rel 111",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-112",
+          "from": "n-112",
+          "to": "n-113",
+          "relation": "precedes",
+          "label": "Rel 112",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-113",
+          "from": "n-113",
+          "to": "n-114",
+          "relation": "compares",
+          "label": "Rel 113",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-114",
+          "from": "n-114",
+          "to": "n-115",
+          "relation": "supports",
+          "label": "Rel 114",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-115",
+          "from": "n-115",
+          "to": "n-116",
+          "relation": "qualifies",
+          "label": "Rel 115",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-116",
+          "from": "n-116",
+          "to": "n-117",
+          "relation": "contradicts",
+          "label": "Rel 116",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-117",
+          "from": "n-117",
+          "to": "n-118",
+          "relation": "depends_on",
+          "label": "Rel 117",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-118",
+          "from": "n-118",
+          "to": "n-119",
+          "relation": "precedes",
+          "label": "Rel 118",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-119",
+          "from": "n-119",
+          "to": "n-120",
+          "relation": "compares",
+          "label": "Rel 119",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-120",
+          "from": "n-120",
+          "to": "n-121",
+          "relation": "supports",
+          "label": "Rel 120",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-121",
+          "from": "n-121",
+          "to": "n-122",
+          "relation": "qualifies",
+          "label": "Rel 121",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-122",
+          "from": "n-122",
+          "to": "n-123",
+          "relation": "contradicts",
+          "label": "Rel 122",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-123",
+          "from": "n-123",
+          "to": "n-124",
+          "relation": "depends_on",
+          "label": "Rel 123",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-124",
+          "from": "n-124",
+          "to": "n-125",
+          "relation": "precedes",
+          "label": "Rel 124",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-125",
+          "from": "n-125",
+          "to": "n-126",
+          "relation": "compares",
+          "label": "Rel 125",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-126",
+          "from": "n-126",
+          "to": "n-127",
+          "relation": "supports",
+          "label": "Rel 126",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-127",
+          "from": "n-127",
+          "to": "n-128",
+          "relation": "qualifies",
+          "label": "Rel 127",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-128",
+          "from": "n-128",
+          "to": "n-129",
+          "relation": "contradicts",
+          "label": "Rel 128",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-129",
+          "from": "n-129",
+          "to": "n-130",
+          "relation": "depends_on",
+          "label": "Rel 129",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-130",
+          "from": "n-130",
+          "to": "n-131",
+          "relation": "precedes",
+          "label": "Rel 130",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-131",
+          "from": "n-131",
+          "to": "n-132",
+          "relation": "compares",
+          "label": "Rel 131",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-132",
+          "from": "n-132",
+          "to": "n-133",
+          "relation": "supports",
+          "label": "Rel 132",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-133",
+          "from": "n-133",
+          "to": "n-134",
+          "relation": "qualifies",
+          "label": "Rel 133",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-134",
+          "from": "n-134",
+          "to": "n-135",
+          "relation": "contradicts",
+          "label": "Rel 134",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-135",
+          "from": "n-135",
+          "to": "n-136",
+          "relation": "depends_on",
+          "label": "Rel 135",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-136",
+          "from": "n-136",
+          "to": "n-137",
+          "relation": "precedes",
+          "label": "Rel 136",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-137",
+          "from": "n-137",
+          "to": "n-138",
+          "relation": "compares",
+          "label": "Rel 137",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-138",
+          "from": "n-138",
+          "to": "n-139",
+          "relation": "supports",
+          "label": "Rel 138",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-139",
+          "from": "n-139",
+          "to": "n-140",
+          "relation": "qualifies",
+          "label": "Rel 139",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-140",
+          "from": "n-140",
+          "to": "n-141",
+          "relation": "contradicts",
+          "label": "Rel 140",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-141",
+          "from": "n-141",
+          "to": "n-142",
+          "relation": "depends_on",
+          "label": "Rel 141",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-142",
+          "from": "n-142",
+          "to": "n-143",
+          "relation": "precedes",
+          "label": "Rel 142",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-143",
+          "from": "n-143",
+          "to": "n-144",
+          "relation": "compares",
+          "label": "Rel 143",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-144",
+          "from": "n-144",
+          "to": "n-145",
+          "relation": "supports",
+          "label": "Rel 144",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-145",
+          "from": "n-145",
+          "to": "n-146",
+          "relation": "qualifies",
+          "label": "Rel 145",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-146",
+          "from": "n-146",
+          "to": "n-147",
+          "relation": "contradicts",
+          "label": "Rel 146",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-147",
+          "from": "n-147",
+          "to": "n-148",
+          "relation": "depends_on",
+          "label": "Rel 147",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-148",
+          "from": "n-148",
+          "to": "n-149",
+          "relation": "precedes",
+          "label": "Rel 148",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-149",
+          "from": "n-149",
+          "to": "n-150",
+          "relation": "compares",
+          "label": "Rel 149",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-150",
+          "from": "n-150",
+          "to": "n-151",
+          "relation": "supports",
+          "label": "Rel 150",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-151",
+          "from": "n-151",
+          "to": "n-152",
+          "relation": "qualifies",
+          "label": "Rel 151",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-152",
+          "from": "n-152",
+          "to": "n-153",
+          "relation": "contradicts",
+          "label": "Rel 152",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-153",
+          "from": "n-153",
+          "to": "n-154",
+          "relation": "depends_on",
+          "label": "Rel 153",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-154",
+          "from": "n-154",
+          "to": "n-155",
+          "relation": "precedes",
+          "label": "Rel 154",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-155",
+          "from": "n-155",
+          "to": "n-156",
+          "relation": "compares",
+          "label": "Rel 155",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-156",
+          "from": "n-156",
+          "to": "n-157",
+          "relation": "supports",
+          "label": "Rel 156",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-157",
+          "from": "n-157",
+          "to": "n-158",
+          "relation": "qualifies",
+          "label": "Rel 157",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-158",
+          "from": "n-158",
+          "to": "n-159",
+          "relation": "contradicts",
+          "label": "Rel 158",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-159",
+          "from": "n-159",
+          "to": "n-160",
+          "relation": "depends_on",
+          "label": "Rel 159",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-160",
+          "from": "n-160",
+          "to": "n-161",
+          "relation": "precedes",
+          "label": "Rel 160",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-161",
+          "from": "n-161",
+          "to": "n-162",
+          "relation": "compares",
+          "label": "Rel 161",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-162",
+          "from": "n-162",
+          "to": "n-163",
+          "relation": "supports",
+          "label": "Rel 162",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-163",
+          "from": "n-163",
+          "to": "n-164",
+          "relation": "qualifies",
+          "label": "Rel 163",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-164",
+          "from": "n-164",
+          "to": "n-165",
+          "relation": "contradicts",
+          "label": "Rel 164",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-165",
+          "from": "n-165",
+          "to": "n-166",
+          "relation": "depends_on",
+          "label": "Rel 165",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-166",
+          "from": "n-166",
+          "to": "n-167",
+          "relation": "precedes",
+          "label": "Rel 166",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-167",
+          "from": "n-167",
+          "to": "n-168",
+          "relation": "compares",
+          "label": "Rel 167",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-168",
+          "from": "n-168",
+          "to": "n-169",
+          "relation": "supports",
+          "label": "Rel 168",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-169",
+          "from": "n-169",
+          "to": "n-170",
+          "relation": "qualifies",
+          "label": "Rel 169",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-170",
+          "from": "n-170",
+          "to": "n-171",
+          "relation": "contradicts",
+          "label": "Rel 170",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-171",
+          "from": "n-171",
+          "to": "n-172",
+          "relation": "depends_on",
+          "label": "Rel 171",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-172",
+          "from": "n-172",
+          "to": "n-173",
+          "relation": "precedes",
+          "label": "Rel 172",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-173",
+          "from": "n-173",
+          "to": "n-174",
+          "relation": "compares",
+          "label": "Rel 173",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-174",
+          "from": "n-174",
+          "to": "n-175",
+          "relation": "supports",
+          "label": "Rel 174",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-175",
+          "from": "n-175",
+          "to": "n-176",
+          "relation": "qualifies",
+          "label": "Rel 175",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-176",
+          "from": "n-176",
+          "to": "n-177",
+          "relation": "contradicts",
+          "label": "Rel 176",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-177",
+          "from": "n-177",
+          "to": "n-178",
+          "relation": "depends_on",
+          "label": "Rel 177",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-178",
+          "from": "n-178",
+          "to": "n-179",
+          "relation": "precedes",
+          "label": "Rel 178",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-179",
+          "from": "n-179",
+          "to": "n-180",
+          "relation": "compares",
+          "label": "Rel 179",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-180",
+          "from": "n-180",
+          "to": "n-181",
+          "relation": "supports",
+          "label": "Rel 180",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-181",
+          "from": "n-181",
+          "to": "n-182",
+          "relation": "qualifies",
+          "label": "Rel 181",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-182",
+          "from": "n-182",
+          "to": "n-183",
+          "relation": "contradicts",
+          "label": "Rel 182",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-183",
+          "from": "n-183",
+          "to": "n-184",
+          "relation": "depends_on",
+          "label": "Rel 183",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-184",
+          "from": "n-184",
+          "to": "n-185",
+          "relation": "precedes",
+          "label": "Rel 184",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-185",
+          "from": "n-185",
+          "to": "n-186",
+          "relation": "compares",
+          "label": "Rel 185",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-186",
+          "from": "n-186",
+          "to": "n-187",
+          "relation": "supports",
+          "label": "Rel 186",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-187",
+          "from": "n-187",
+          "to": "n-188",
+          "relation": "qualifies",
+          "label": "Rel 187",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-188",
+          "from": "n-188",
+          "to": "n-189",
+          "relation": "contradicts",
+          "label": "Rel 188",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-189",
+          "from": "n-189",
+          "to": "n-190",
+          "relation": "depends_on",
+          "label": "Rel 189",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-190",
+          "from": "n-190",
+          "to": "n-191",
+          "relation": "precedes",
+          "label": "Rel 190",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-191",
+          "from": "n-191",
+          "to": "n-192",
+          "relation": "compares",
+          "label": "Rel 191",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-192",
+          "from": "n-192",
+          "to": "n-193",
+          "relation": "supports",
+          "label": "Rel 192",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-193",
+          "from": "n-193",
+          "to": "n-194",
+          "relation": "qualifies",
+          "label": "Rel 193",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-194",
+          "from": "n-194",
+          "to": "n-195",
+          "relation": "contradicts",
+          "label": "Rel 194",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-195",
+          "from": "n-195",
+          "to": "n-196",
+          "relation": "depends_on",
+          "label": "Rel 195",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-196",
+          "from": "n-196",
+          "to": "n-197",
+          "relation": "precedes",
+          "label": "Rel 196",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-197",
+          "from": "n-197",
+          "to": "n-198",
+          "relation": "compares",
+          "label": "Rel 197",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-198",
+          "from": "n-198",
+          "to": "n-199",
+          "relation": "supports",
+          "label": "Rel 198",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-199",
+          "from": "n-199",
+          "to": "n-200",
+          "relation": "qualifies",
+          "label": "Rel 199",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-200",
+          "from": "n-200",
+          "to": "n-000",
+          "relation": "contradicts",
+          "label": "Rel 200",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-201",
+          "from": "n-000",
+          "to": "n-001",
+          "relation": "depends_on",
+          "label": "Rel 201",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-202",
+          "from": "n-001",
+          "to": "n-002",
+          "relation": "precedes",
+          "label": "Rel 202",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-203",
+          "from": "n-002",
+          "to": "n-003",
+          "relation": "compares",
+          "label": "Rel 203",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-204",
+          "from": "n-003",
+          "to": "n-004",
+          "relation": "supports",
+          "label": "Rel 204",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-205",
+          "from": "n-004",
+          "to": "n-005",
+          "relation": "qualifies",
+          "label": "Rel 205",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-206",
+          "from": "n-005",
+          "to": "n-006",
+          "relation": "contradicts",
+          "label": "Rel 206",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-207",
+          "from": "n-006",
+          "to": "n-007",
+          "relation": "depends_on",
+          "label": "Rel 207",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-208",
+          "from": "n-007",
+          "to": "n-008",
+          "relation": "precedes",
+          "label": "Rel 208",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-209",
+          "from": "n-008",
+          "to": "n-009",
+          "relation": "compares",
+          "label": "Rel 209",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-210",
+          "from": "n-009",
+          "to": "n-010",
+          "relation": "supports",
+          "label": "Rel 210",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-211",
+          "from": "n-010",
+          "to": "n-011",
+          "relation": "qualifies",
+          "label": "Rel 211",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-212",
+          "from": "n-011",
+          "to": "n-012",
+          "relation": "contradicts",
+          "label": "Rel 212",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-213",
+          "from": "n-012",
+          "to": "n-013",
+          "relation": "depends_on",
+          "label": "Rel 213",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-214",
+          "from": "n-013",
+          "to": "n-014",
+          "relation": "precedes",
+          "label": "Rel 214",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-215",
+          "from": "n-014",
+          "to": "n-015",
+          "relation": "compares",
+          "label": "Rel 215",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-216",
+          "from": "n-015",
+          "to": "n-016",
+          "relation": "supports",
+          "label": "Rel 216",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-217",
+          "from": "n-016",
+          "to": "n-017",
+          "relation": "qualifies",
+          "label": "Rel 217",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-218",
+          "from": "n-017",
+          "to": "n-018",
+          "relation": "contradicts",
+          "label": "Rel 218",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-219",
+          "from": "n-018",
+          "to": "n-019",
+          "relation": "depends_on",
+          "label": "Rel 219",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-220",
+          "from": "n-019",
+          "to": "n-020",
+          "relation": "precedes",
+          "label": "Rel 220",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-221",
+          "from": "n-020",
+          "to": "n-021",
+          "relation": "compares",
+          "label": "Rel 221",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-222",
+          "from": "n-021",
+          "to": "n-022",
+          "relation": "supports",
+          "label": "Rel 222",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-223",
+          "from": "n-022",
+          "to": "n-023",
+          "relation": "qualifies",
+          "label": "Rel 223",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-224",
+          "from": "n-023",
+          "to": "n-024",
+          "relation": "contradicts",
+          "label": "Rel 224",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-225",
+          "from": "n-024",
+          "to": "n-025",
+          "relation": "depends_on",
+          "label": "Rel 225",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-226",
+          "from": "n-025",
+          "to": "n-026",
+          "relation": "precedes",
+          "label": "Rel 226",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-227",
+          "from": "n-026",
+          "to": "n-027",
+          "relation": "compares",
+          "label": "Rel 227",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-228",
+          "from": "n-027",
+          "to": "n-028",
+          "relation": "supports",
+          "label": "Rel 228",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-229",
+          "from": "n-028",
+          "to": "n-029",
+          "relation": "qualifies",
+          "label": "Rel 229",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-230",
+          "from": "n-029",
+          "to": "n-030",
+          "relation": "contradicts",
+          "label": "Rel 230",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-231",
+          "from": "n-030",
+          "to": "n-031",
+          "relation": "depends_on",
+          "label": "Rel 231",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-232",
+          "from": "n-031",
+          "to": "n-032",
+          "relation": "precedes",
+          "label": "Rel 232",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-233",
+          "from": "n-032",
+          "to": "n-033",
+          "relation": "compares",
+          "label": "Rel 233",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-234",
+          "from": "n-033",
+          "to": "n-034",
+          "relation": "supports",
+          "label": "Rel 234",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-235",
+          "from": "n-034",
+          "to": "n-035",
+          "relation": "qualifies",
+          "label": "Rel 235",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-236",
+          "from": "n-035",
+          "to": "n-036",
+          "relation": "contradicts",
+          "label": "Rel 236",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-237",
+          "from": "n-036",
+          "to": "n-037",
+          "relation": "depends_on",
+          "label": "Rel 237",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-238",
+          "from": "n-037",
+          "to": "n-038",
+          "relation": "precedes",
+          "label": "Rel 238",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-239",
+          "from": "n-038",
+          "to": "n-039",
+          "relation": "compares",
+          "label": "Rel 239",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-240",
+          "from": "n-039",
+          "to": "n-040",
+          "relation": "supports",
+          "label": "Rel 240",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-241",
+          "from": "n-040",
+          "to": "n-041",
+          "relation": "qualifies",
+          "label": "Rel 241",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-242",
+          "from": "n-041",
+          "to": "n-042",
+          "relation": "contradicts",
+          "label": "Rel 242",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-243",
+          "from": "n-042",
+          "to": "n-043",
+          "relation": "depends_on",
+          "label": "Rel 243",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-244",
+          "from": "n-043",
+          "to": "n-044",
+          "relation": "precedes",
+          "label": "Rel 244",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-245",
+          "from": "n-044",
+          "to": "n-045",
+          "relation": "compares",
+          "label": "Rel 245",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-246",
+          "from": "n-045",
+          "to": "n-046",
+          "relation": "supports",
+          "label": "Rel 246",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-247",
+          "from": "n-046",
+          "to": "n-047",
+          "relation": "qualifies",
+          "label": "Rel 247",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-248",
+          "from": "n-047",
+          "to": "n-048",
+          "relation": "contradicts",
+          "label": "Rel 248",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-249",
+          "from": "n-048",
+          "to": "n-049",
+          "relation": "depends_on",
+          "label": "Rel 249",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-250",
+          "from": "n-049",
+          "to": "n-050",
+          "relation": "precedes",
+          "label": "Rel 250",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-251",
+          "from": "n-050",
+          "to": "n-051",
+          "relation": "compares",
+          "label": "Rel 251",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-252",
+          "from": "n-051",
+          "to": "n-052",
+          "relation": "supports",
+          "label": "Rel 252",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-253",
+          "from": "n-052",
+          "to": "n-053",
+          "relation": "qualifies",
+          "label": "Rel 253",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-254",
+          "from": "n-053",
+          "to": "n-054",
+          "relation": "contradicts",
+          "label": "Rel 254",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-255",
+          "from": "n-054",
+          "to": "n-055",
+          "relation": "depends_on",
+          "label": "Rel 255",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-256",
+          "from": "n-055",
+          "to": "n-056",
+          "relation": "precedes",
+          "label": "Rel 256",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-257",
+          "from": "n-056",
+          "to": "n-057",
+          "relation": "compares",
+          "label": "Rel 257",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-258",
+          "from": "n-057",
+          "to": "n-058",
+          "relation": "supports",
+          "label": "Rel 258",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-259",
+          "from": "n-058",
+          "to": "n-059",
+          "relation": "qualifies",
+          "label": "Rel 259",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-260",
+          "from": "n-059",
+          "to": "n-060",
+          "relation": "contradicts",
+          "label": "Rel 260",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-261",
+          "from": "n-060",
+          "to": "n-061",
+          "relation": "depends_on",
+          "label": "Rel 261",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-262",
+          "from": "n-061",
+          "to": "n-062",
+          "relation": "precedes",
+          "label": "Rel 262",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-263",
+          "from": "n-062",
+          "to": "n-063",
+          "relation": "compares",
+          "label": "Rel 263",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-264",
+          "from": "n-063",
+          "to": "n-064",
+          "relation": "supports",
+          "label": "Rel 264",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-265",
+          "from": "n-064",
+          "to": "n-065",
+          "relation": "qualifies",
+          "label": "Rel 265",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-266",
+          "from": "n-065",
+          "to": "n-066",
+          "relation": "contradicts",
+          "label": "Rel 266",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-267",
+          "from": "n-066",
+          "to": "n-067",
+          "relation": "depends_on",
+          "label": "Rel 267",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-268",
+          "from": "n-067",
+          "to": "n-068",
+          "relation": "precedes",
+          "label": "Rel 268",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-269",
+          "from": "n-068",
+          "to": "n-069",
+          "relation": "compares",
+          "label": "Rel 269",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-270",
+          "from": "n-069",
+          "to": "n-070",
+          "relation": "supports",
+          "label": "Rel 270",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-271",
+          "from": "n-070",
+          "to": "n-071",
+          "relation": "qualifies",
+          "label": "Rel 271",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-272",
+          "from": "n-071",
+          "to": "n-072",
+          "relation": "contradicts",
+          "label": "Rel 272",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-273",
+          "from": "n-072",
+          "to": "n-073",
+          "relation": "depends_on",
+          "label": "Rel 273",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-274",
+          "from": "n-073",
+          "to": "n-074",
+          "relation": "precedes",
+          "label": "Rel 274",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-275",
+          "from": "n-074",
+          "to": "n-075",
+          "relation": "compares",
+          "label": "Rel 275",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-276",
+          "from": "n-075",
+          "to": "n-076",
+          "relation": "supports",
+          "label": "Rel 276",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-277",
+          "from": "n-076",
+          "to": "n-077",
+          "relation": "qualifies",
+          "label": "Rel 277",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-278",
+          "from": "n-077",
+          "to": "n-078",
+          "relation": "contradicts",
+          "label": "Rel 278",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-279",
+          "from": "n-078",
+          "to": "n-079",
+          "relation": "depends_on",
+          "label": "Rel 279",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-280",
+          "from": "n-079",
+          "to": "n-080",
+          "relation": "precedes",
+          "label": "Rel 280",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-281",
+          "from": "n-080",
+          "to": "n-081",
+          "relation": "compares",
+          "label": "Rel 281",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-282",
+          "from": "n-081",
+          "to": "n-082",
+          "relation": "supports",
+          "label": "Rel 282",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-283",
+          "from": "n-082",
+          "to": "n-083",
+          "relation": "qualifies",
+          "label": "Rel 283",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-284",
+          "from": "n-083",
+          "to": "n-084",
+          "relation": "contradicts",
+          "label": "Rel 284",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-285",
+          "from": "n-084",
+          "to": "n-085",
+          "relation": "depends_on",
+          "label": "Rel 285",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-286",
+          "from": "n-085",
+          "to": "n-086",
+          "relation": "precedes",
+          "label": "Rel 286",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-287",
+          "from": "n-086",
+          "to": "n-087",
+          "relation": "compares",
+          "label": "Rel 287",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-288",
+          "from": "n-087",
+          "to": "n-088",
+          "relation": "supports",
+          "label": "Rel 288",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-289",
+          "from": "n-088",
+          "to": "n-089",
+          "relation": "qualifies",
+          "label": "Rel 289",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-290",
+          "from": "n-089",
+          "to": "n-090",
+          "relation": "contradicts",
+          "label": "Rel 290",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-291",
+          "from": "n-090",
+          "to": "n-091",
+          "relation": "depends_on",
+          "label": "Rel 291",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-292",
+          "from": "n-091",
+          "to": "n-092",
+          "relation": "precedes",
+          "label": "Rel 292",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-293",
+          "from": "n-092",
+          "to": "n-093",
+          "relation": "compares",
+          "label": "Rel 293",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-294",
+          "from": "n-093",
+          "to": "n-094",
+          "relation": "supports",
+          "label": "Rel 294",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-295",
+          "from": "n-094",
+          "to": "n-095",
+          "relation": "qualifies",
+          "label": "Rel 295",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-296",
+          "from": "n-095",
+          "to": "n-096",
+          "relation": "contradicts",
+          "label": "Rel 296",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-297",
+          "from": "n-096",
+          "to": "n-097",
+          "relation": "depends_on",
+          "label": "Rel 297",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-298",
+          "from": "n-097",
+          "to": "n-098",
+          "relation": "precedes",
+          "label": "Rel 298",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-299",
+          "from": "n-098",
+          "to": "n-099",
+          "relation": "compares",
+          "label": "Rel 299",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-300",
+          "from": "n-099",
+          "to": "n-100",
+          "relation": "supports",
+          "label": "Rel 300",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-301",
+          "from": "n-100",
+          "to": "n-101",
+          "relation": "qualifies",
+          "label": "Rel 301",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-302",
+          "from": "n-101",
+          "to": "n-102",
+          "relation": "contradicts",
+          "label": "Rel 302",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-303",
+          "from": "n-102",
+          "to": "n-103",
+          "relation": "depends_on",
+          "label": "Rel 303",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-304",
+          "from": "n-103",
+          "to": "n-104",
+          "relation": "precedes",
+          "label": "Rel 304",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-305",
+          "from": "n-104",
+          "to": "n-105",
+          "relation": "compares",
+          "label": "Rel 305",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-306",
+          "from": "n-105",
+          "to": "n-106",
+          "relation": "supports",
+          "label": "Rel 306",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-307",
+          "from": "n-106",
+          "to": "n-107",
+          "relation": "qualifies",
+          "label": "Rel 307",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-308",
+          "from": "n-107",
+          "to": "n-108",
+          "relation": "contradicts",
+          "label": "Rel 308",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-309",
+          "from": "n-108",
+          "to": "n-109",
+          "relation": "depends_on",
+          "label": "Rel 309",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-310",
+          "from": "n-109",
+          "to": "n-110",
+          "relation": "precedes",
+          "label": "Rel 310",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-311",
+          "from": "n-110",
+          "to": "n-111",
+          "relation": "compares",
+          "label": "Rel 311",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-312",
+          "from": "n-111",
+          "to": "n-112",
+          "relation": "supports",
+          "label": "Rel 312",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-313",
+          "from": "n-112",
+          "to": "n-113",
+          "relation": "qualifies",
+          "label": "Rel 313",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-314",
+          "from": "n-113",
+          "to": "n-114",
+          "relation": "contradicts",
+          "label": "Rel 314",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-315",
+          "from": "n-114",
+          "to": "n-115",
+          "relation": "depends_on",
+          "label": "Rel 315",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-316",
+          "from": "n-115",
+          "to": "n-116",
+          "relation": "precedes",
+          "label": "Rel 316",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-317",
+          "from": "n-116",
+          "to": "n-117",
+          "relation": "compares",
+          "label": "Rel 317",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-318",
+          "from": "n-117",
+          "to": "n-118",
+          "relation": "supports",
+          "label": "Rel 318",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-319",
+          "from": "n-118",
+          "to": "n-119",
+          "relation": "qualifies",
+          "label": "Rel 319",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-320",
+          "from": "n-119",
+          "to": "n-120",
+          "relation": "contradicts",
+          "label": "Rel 320",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-321",
+          "from": "n-120",
+          "to": "n-121",
+          "relation": "depends_on",
+          "label": "Rel 321",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-322",
+          "from": "n-121",
+          "to": "n-122",
+          "relation": "precedes",
+          "label": "Rel 322",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-323",
+          "from": "n-122",
+          "to": "n-123",
+          "relation": "compares",
+          "label": "Rel 323",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-324",
+          "from": "n-123",
+          "to": "n-124",
+          "relation": "supports",
+          "label": "Rel 324",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-325",
+          "from": "n-124",
+          "to": "n-125",
+          "relation": "qualifies",
+          "label": "Rel 325",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-326",
+          "from": "n-125",
+          "to": "n-126",
+          "relation": "contradicts",
+          "label": "Rel 326",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-327",
+          "from": "n-126",
+          "to": "n-127",
+          "relation": "depends_on",
+          "label": "Rel 327",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-328",
+          "from": "n-127",
+          "to": "n-128",
+          "relation": "precedes",
+          "label": "Rel 328",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-329",
+          "from": "n-128",
+          "to": "n-129",
+          "relation": "compares",
+          "label": "Rel 329",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-330",
+          "from": "n-129",
+          "to": "n-130",
+          "relation": "supports",
+          "label": "Rel 330",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-331",
+          "from": "n-130",
+          "to": "n-131",
+          "relation": "qualifies",
+          "label": "Rel 331",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-332",
+          "from": "n-131",
+          "to": "n-132",
+          "relation": "contradicts",
+          "label": "Rel 332",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-333",
+          "from": "n-132",
+          "to": "n-133",
+          "relation": "depends_on",
+          "label": "Rel 333",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-334",
+          "from": "n-133",
+          "to": "n-134",
+          "relation": "precedes",
+          "label": "Rel 334",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-335",
+          "from": "n-134",
+          "to": "n-135",
+          "relation": "compares",
+          "label": "Rel 335",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-336",
+          "from": "n-135",
+          "to": "n-136",
+          "relation": "supports",
+          "label": "Rel 336",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-337",
+          "from": "n-136",
+          "to": "n-137",
+          "relation": "qualifies",
+          "label": "Rel 337",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-338",
+          "from": "n-137",
+          "to": "n-138",
+          "relation": "contradicts",
+          "label": "Rel 338",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-339",
+          "from": "n-138",
+          "to": "n-139",
+          "relation": "depends_on",
+          "label": "Rel 339",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-340",
+          "from": "n-139",
+          "to": "n-140",
+          "relation": "precedes",
+          "label": "Rel 340",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-341",
+          "from": "n-140",
+          "to": "n-141",
+          "relation": "compares",
+          "label": "Rel 341",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-342",
+          "from": "n-141",
+          "to": "n-142",
+          "relation": "supports",
+          "label": "Rel 342",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-343",
+          "from": "n-142",
+          "to": "n-143",
+          "relation": "qualifies",
+          "label": "Rel 343",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-344",
+          "from": "n-143",
+          "to": "n-144",
+          "relation": "contradicts",
+          "label": "Rel 344",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-345",
+          "from": "n-144",
+          "to": "n-145",
+          "relation": "depends_on",
+          "label": "Rel 345",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-346",
+          "from": "n-145",
+          "to": "n-146",
+          "relation": "precedes",
+          "label": "Rel 346",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-347",
+          "from": "n-146",
+          "to": "n-147",
+          "relation": "compares",
+          "label": "Rel 347",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-348",
+          "from": "n-147",
+          "to": "n-148",
+          "relation": "supports",
+          "label": "Rel 348",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-349",
+          "from": "n-148",
+          "to": "n-149",
+          "relation": "qualifies",
+          "label": "Rel 349",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-350",
+          "from": "n-149",
+          "to": "n-150",
+          "relation": "contradicts",
+          "label": "Rel 350",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-351",
+          "from": "n-150",
+          "to": "n-151",
+          "relation": "depends_on",
+          "label": "Rel 351",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-352",
+          "from": "n-151",
+          "to": "n-152",
+          "relation": "precedes",
+          "label": "Rel 352",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-353",
+          "from": "n-152",
+          "to": "n-153",
+          "relation": "compares",
+          "label": "Rel 353",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-354",
+          "from": "n-153",
+          "to": "n-154",
+          "relation": "supports",
+          "label": "Rel 354",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-355",
+          "from": "n-154",
+          "to": "n-155",
+          "relation": "qualifies",
+          "label": "Rel 355",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-356",
+          "from": "n-155",
+          "to": "n-156",
+          "relation": "contradicts",
+          "label": "Rel 356",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-357",
+          "from": "n-156",
+          "to": "n-157",
+          "relation": "depends_on",
+          "label": "Rel 357",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-358",
+          "from": "n-157",
+          "to": "n-158",
+          "relation": "precedes",
+          "label": "Rel 358",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-359",
+          "from": "n-158",
+          "to": "n-159",
+          "relation": "compares",
+          "label": "Rel 359",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-360",
+          "from": "n-159",
+          "to": "n-160",
+          "relation": "supports",
+          "label": "Rel 360",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-361",
+          "from": "n-160",
+          "to": "n-161",
+          "relation": "qualifies",
+          "label": "Rel 361",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-362",
+          "from": "n-161",
+          "to": "n-162",
+          "relation": "contradicts",
+          "label": "Rel 362",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-363",
+          "from": "n-162",
+          "to": "n-163",
+          "relation": "depends_on",
+          "label": "Rel 363",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-364",
+          "from": "n-163",
+          "to": "n-164",
+          "relation": "precedes",
+          "label": "Rel 364",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-365",
+          "from": "n-164",
+          "to": "n-165",
+          "relation": "compares",
+          "label": "Rel 365",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-366",
+          "from": "n-165",
+          "to": "n-166",
+          "relation": "supports",
+          "label": "Rel 366",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-367",
+          "from": "n-166",
+          "to": "n-167",
+          "relation": "qualifies",
+          "label": "Rel 367",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-368",
+          "from": "n-167",
+          "to": "n-168",
+          "relation": "contradicts",
+          "label": "Rel 368",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-369",
+          "from": "n-168",
+          "to": "n-169",
+          "relation": "depends_on",
+          "label": "Rel 369",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-370",
+          "from": "n-169",
+          "to": "n-170",
+          "relation": "precedes",
+          "label": "Rel 370",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-371",
+          "from": "n-170",
+          "to": "n-171",
+          "relation": "compares",
+          "label": "Rel 371",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-372",
+          "from": "n-171",
+          "to": "n-172",
+          "relation": "supports",
+          "label": "Rel 372",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-373",
+          "from": "n-172",
+          "to": "n-173",
+          "relation": "qualifies",
+          "label": "Rel 373",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-374",
+          "from": "n-173",
+          "to": "n-174",
+          "relation": "contradicts",
+          "label": "Rel 374",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-375",
+          "from": "n-174",
+          "to": "n-175",
+          "relation": "depends_on",
+          "label": "Rel 375",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-376",
+          "from": "n-175",
+          "to": "n-176",
+          "relation": "precedes",
+          "label": "Rel 376",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-377",
+          "from": "n-176",
+          "to": "n-177",
+          "relation": "compares",
+          "label": "Rel 377",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-378",
+          "from": "n-177",
+          "to": "n-178",
+          "relation": "supports",
+          "label": "Rel 378",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-379",
+          "from": "n-178",
+          "to": "n-179",
+          "relation": "qualifies",
+          "label": "Rel 379",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-380",
+          "from": "n-179",
+          "to": "n-180",
+          "relation": "contradicts",
+          "label": "Rel 380",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-381",
+          "from": "n-180",
+          "to": "n-181",
+          "relation": "depends_on",
+          "label": "Rel 381",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-382",
+          "from": "n-181",
+          "to": "n-182",
+          "relation": "precedes",
+          "label": "Rel 382",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-383",
+          "from": "n-182",
+          "to": "n-183",
+          "relation": "compares",
+          "label": "Rel 383",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-384",
+          "from": "n-183",
+          "to": "n-184",
+          "relation": "supports",
+          "label": "Rel 384",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-385",
+          "from": "n-184",
+          "to": "n-185",
+          "relation": "qualifies",
+          "label": "Rel 385",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-386",
+          "from": "n-185",
+          "to": "n-186",
+          "relation": "contradicts",
+          "label": "Rel 386",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-387",
+          "from": "n-186",
+          "to": "n-187",
+          "relation": "depends_on",
+          "label": "Rel 387",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-388",
+          "from": "n-187",
+          "to": "n-188",
+          "relation": "precedes",
+          "label": "Rel 388",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-389",
+          "from": "n-188",
+          "to": "n-189",
+          "relation": "compares",
+          "label": "Rel 389",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-390",
+          "from": "n-189",
+          "to": "n-190",
+          "relation": "supports",
+          "label": "Rel 390",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-391",
+          "from": "n-190",
+          "to": "n-191",
+          "relation": "qualifies",
+          "label": "Rel 391",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-392",
+          "from": "n-191",
+          "to": "n-192",
+          "relation": "contradicts",
+          "label": "Rel 392",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-393",
+          "from": "n-192",
+          "to": "n-193",
+          "relation": "depends_on",
+          "label": "Rel 393",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-394",
+          "from": "n-193",
+          "to": "n-194",
+          "relation": "precedes",
+          "label": "Rel 394",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-395",
+          "from": "n-194",
+          "to": "n-195",
+          "relation": "compares",
+          "label": "Rel 395",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-396",
+          "from": "n-195",
+          "to": "n-196",
+          "relation": "supports",
+          "label": "Rel 396",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-397",
+          "from": "n-196",
+          "to": "n-197",
+          "relation": "qualifies",
+          "label": "Rel 397",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-398",
+          "from": "n-197",
+          "to": "n-198",
+          "relation": "contradicts",
+          "label": "Rel 398",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-399",
+          "from": "n-198",
+          "to": "n-199",
+          "relation": "depends_on",
+          "label": "Rel 399",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        },
+        {
+          "id": "e-400",
+          "from": "n-199",
+          "to": "n-200",
+          "relation": "precedes",
+          "label": "Rel 400",
+          "unit_refs": [
+            "u-scale-src"
+          ]
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "profiles": []
+}

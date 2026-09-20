@@ -1,0 +1,97 @@
+{
+  "format": "cockpit-v1",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "doc-error-test-base",
+    "revision": "rev-1",
+    "title": "Error Test Base Document",
+    "author_refs": [
+      "auth-e-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-e-01",
+      "kind": "tool",
+      "name": "Error Fixture Generator"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-e-01",
+      "kind": "source",
+      "title": "Source Clause",
+      "text": "Base source text for error testing.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-e-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "Base Spec"
+      }
+    },
+    {
+      "id": "u-e-02",
+      "kind": "model",
+      "title": "Model Unit",
+      "text": "Base model unit text.",
+      "text_format": "markdown-safe",
+      "author_refs": [
+        "auth-e-01"
+      ],
+      "epistemic": "hypothesis",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": []
+    },
+    {
+      "id": "u-e-03",
+      "kind": "analysis",
+      "title": "Analysis Unit",
+      "text": "Base analysis unit text.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-e-01"
+      ],
+      "epistemic": "supported",
+      "status": "reviewed",
+      "source_refs": [
+        "u-e-01"
+      ],
+      "asset_ids": []
+    },
+    {
+      "id": "u-e-04",
+      "kind": "action",
+      "title": "Action Unit",
+      "text": "Base action unit text.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-e-01"
+      ],
+      "epistemic": "not-applicable",
+      "status": "draft",
+      "source_refs": [],
+      "asset_ids": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-e-01",
+      "title": "Base Error Group",
+      "unit_refs": [
+        "u-e-01",
+        "u-e-02",
+        "u-e-03",
+        "u-e-04"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": []
+}

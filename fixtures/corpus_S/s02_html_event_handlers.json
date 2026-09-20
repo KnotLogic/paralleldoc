@@ -1,0 +1,47 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "doc-sec-02-event-handlers",
+    "revision": "rev-1",
+    "title": "HTML Event Handler Injection",
+    "author_refs": [
+      "auth-sec-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-sec-01",
+      "kind": "tool",
+      "name": "Security Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-sec-02",
+      "kind": "analysis",
+      "title": "Inline Event Handlers",
+      "text": "Testing img onerror: <img src=x onerror=\"window.XSS_EVENT=1;alert('ONERROR')\"> and svg onload: <svg onload=\"alert('SVG_ONLOAD')\"><circle r=10></circle></svg>",
+      "text_format": "markdown-safe",
+      "author_refs": [
+        "auth-sec-01"
+      ],
+      "epistemic": "hypothesis",
+      "status": "draft",
+      "source_refs": [],
+      "asset_ids": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-sec-02",
+      "title": "Event Handler Group",
+      "unit_refs": [
+        "u-sec-02"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": []
+}

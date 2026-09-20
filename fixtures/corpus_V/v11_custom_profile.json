@@ -1,0 +1,114 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "v-doc-11-custom-profile",
+    "revision": "rev-1",
+    "title": "Corpus V11 Custom Profile Document",
+    "default_profile_id": "prof-custom-3p",
+    "author_refs": [
+      "auth-v-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-v-01",
+      "kind": "human",
+      "name": "Profile Designer"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-11-src",
+      "kind": "source",
+      "title": "Requirement Clause",
+      "text": "Requirements specification for cloud service availability.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "Specs v1"
+      }
+    },
+    {
+      "id": "u-11-mod",
+      "kind": "model",
+      "title": "Architecture Model",
+      "text": "Graph model of infrastructure layers.",
+      "text_format": "markdown-safe",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "hypothesis",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": []
+    },
+    {
+      "id": "u-11-act",
+      "kind": "action",
+      "title": "Action Items",
+      "text": "Deployment and operational tasks.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "not-applicable",
+      "status": "draft",
+      "source_refs": [],
+      "asset_ids": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-11-01",
+      "title": "Architecture Group",
+      "unit_refs": [
+        "u-11-src",
+        "u-11-mod",
+        "u-11-act"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": [
+    {
+      "id": "prof-custom-3p",
+      "title": "3-Panel Custom Review Layout",
+      "density": "dense",
+      "panels": [
+        {
+          "id": "p-spec",
+          "title": "Specifications",
+          "kinds": [
+            "source"
+          ],
+          "weight": 35
+        },
+        {
+          "id": "p-arch",
+          "title": "Architecture Model",
+          "kinds": [
+            "model",
+            "analysis"
+          ],
+          "weight": 40
+        },
+        {
+          "id": "p-exec",
+          "title": "Execution & Actions",
+          "kinds": [
+            "action"
+          ],
+          "weight": 25
+        }
+      ]
+    }
+  ]
+}

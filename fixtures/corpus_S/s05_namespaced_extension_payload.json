@@ -1,0 +1,63 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "doc-sec-05-proto",
+    "revision": "rev-1",
+    "title": "Prototype Pollution Test",
+    "author_refs": [
+      "auth-sec-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-sec-01",
+      "kind": "tool",
+      "name": "Security Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-sec-05",
+      "kind": "source",
+      "title": "Prototype Pollution Clause",
+      "text": "Payload testing object key isolation in extensions.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-sec-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "Spec §8"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-sec-05",
+      "title": "Proto Test Group",
+      "unit_refs": [
+        "u-sec-05"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": [],
+  "extensions": {
+    "astrai.org/safe-ext": {
+      "__proto__": {
+        "polluted": "yes"
+      },
+      "constructor": {
+        "prototype": {
+          "isAdmin": true
+        }
+      },
+      "payload": "<script>alert('PROTO')</script>"
+    }
+  }
+}

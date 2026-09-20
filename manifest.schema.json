@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ParallelDoc detached digest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "algorithm", "scope", "expected_sha256"],
+  "properties": {
+    "format": {
+      "const": "paralleldoc-integrity-1"
+    },
+    "algorithm": {
+      "const": "SHA-256"
+    },
+    "scope": {
+      "const": "raw-bytes"
+    },
+    "expected_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "document_id": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "string"
+    }
+  }
+}

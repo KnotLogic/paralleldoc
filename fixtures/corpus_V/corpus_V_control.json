@@ -1,0 +1,62 @@
+[
+  {
+    "file": "corpus_V_manifest.json",
+    "bytes": 244,
+    "sha256": "ffb93e96fc84cc9040260d04d5d2ab7f2aa1b3732b0814db29e1430aa1ada543"
+  },
+  {
+    "file": "v01_minimal_empty_collections.json",
+    "bytes": 416,
+    "sha256": "7f5d1c8f128044556509dbce83a012980506bb1b50aefee117a7ff74256c1c4a"
+  },
+  {
+    "file": "v02_optional_fields_missing.json",
+    "bytes": 1289,
+    "sha256": "f34361d7b2821e5bc69c38aa8f2923005de66b52d9ec86989d2b49f4c9098222"
+  },
+  {
+    "file": "v03_namespaced_extensions.json",
+    "bytes": 1364,
+    "sha256": "79ed4b32f50dfe0aaa20fc0a6fb967873fa0cdca1190897ab1e196467d278672"
+  },
+  {
+    "file": "v04_plain_and_markdown.json",
+    "bytes": 1723,
+    "sha256": "a22b00359cd03691c13c10990b3fcf8ce356ec6f555b9421176cb27125a0633f"
+  },
+  {
+    "file": "v05_unicode_rtl_emoji.json",
+    "bytes": 2840,
+    "sha256": "2df10443728a068b85c8dce5fd440bfcec4dffd4867c3a3ee9d02a34426cfabc"
+  },
+  {
+    "file": "v06_long_text_quotes.json",
+    "bytes": 19943,
+    "sha256": "08adac5d39136f1e752c94c2dbce73836a7fb080fb53fd107b798a221bd7c858"
+  },
+  {
+    "file": "v07_valid_id_patterns.json",
+    "bytes": 1566,
+    "sha256": "a3193f6c6436716422a7d067beaba1bc7c5b3405588edd3c78fa30bda909ea35"
+  },
+  {
+    "file": "v08_byte_variant_lf.json",
+    "bytes": 3590,
+    "sha256": "63388ac6b567024504722265aa473ce391996a7abb2b78f9b50d7af4518ff896"
+  },
+  {
+    "file": "v09_byte_variant_crlf.json",
+    "bytes": 3729,
+    "sha256": "4b4ec01742ec04d39229f78d3a31223c735081b55d4ee3c39fc0980eb8ad9b5c"
+  },
+  {
+    "file": "v10_byte_variant_bom.json",
+    "bytes": 3593,
+    "sha256": "fa168ac851d6ca0e7e3cb524c43d60d0c96fb7686c9b357debc4547ad4d13f1b"
+  },
+  {
+    "file": "v11_custom_profile.json",
+    "bytes": 2407,
+    "sha256": "8ba6a20693212f31fb5ce91713de508fb2bb6879409883a4fb79f51034c4a977"
+  }
+]

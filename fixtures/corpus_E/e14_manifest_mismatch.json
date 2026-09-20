@@ -1,0 +1,8 @@
+{
+  "format": "paralleldoc-integrity-1",
+  "algorithm": "SHA-256",
+  "scope": "raw-bytes",
+  "expected_sha256": "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+  "document_id": "doc-error-test-base",
+  "revision": "rev-1"
+}

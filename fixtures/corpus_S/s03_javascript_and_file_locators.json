@@ -1,0 +1,115 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "doc-sec-03-locators",
+    "revision": "rev-1",
+    "title": "Malicious Locators Injection",
+    "author_refs": [
+      "auth-sec-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-sec-01",
+      "kind": "tool",
+      "name": "Security Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-sec-03",
+      "kind": "source",
+      "title": "Dangerous Asset Locators",
+      "text": "Clause referencing forbidden locator schemas.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-sec-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [
+        "ast-sec-js",
+        "ast-sec-file",
+        "ast-sec-unc"
+      ],
+      "provenance": {
+        "label": "Spec §5"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-sec-03",
+      "title": "Locator Group",
+      "unit_refs": [
+        "u-sec-03"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [
+    {
+      "id": "ast-sec-js",
+      "mime": "image/png",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "byte_length": 100,
+      "width": 10,
+      "height": 10,
+      "alt": "JavaScript scheme",
+      "caption": "JS locator",
+      "author_refs": [
+        "auth-sec-01"
+      ],
+      "provenance": {
+        "label": "Spec §5"
+      },
+      "locator": {
+        "mode": "external",
+        "url": "javascript:alert('XSS_LOCATOR')"
+      }
+    },
+    {
+      "id": "ast-sec-file",
+      "mime": "image/png",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "byte_length": 100,
+      "width": 10,
+      "height": 10,
+      "alt": "File scheme",
+      "caption": "File locator",
+      "author_refs": [
+        "auth-sec-01"
+      ],
+      "provenance": {
+        "label": "Spec §5"
+      },
+      "locator": {
+        "mode": "relative",
+        "path": "file:///C:/Windows/System32/drivers/etc/hosts"
+      }
+    },
+    {
+      "id": "ast-sec-unc",
+      "mime": "image/png",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "byte_length": 100,
+      "width": 10,
+      "height": 10,
+      "alt": "UNC share scheme",
+      "caption": "UNC locator",
+      "author_refs": [
+        "auth-sec-01"
+      ],
+      "provenance": {
+        "label": "Spec §5"
+      },
+      "locator": {
+        "mode": "relative",
+        "path": "\\\\192.168.1.100\\smbshare\\exfil.png"
+      }
+    }
+  ],
+  "profiles": []
+}

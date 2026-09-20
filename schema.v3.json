@@ -1,0 +1,352 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ParallelDoc 3.0 portable semantic document",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "version",
+    "metadata",
+    "authors",
+    "units",
+    "groups",
+    "visuals",
+    "assets",
+    "profiles"
+  ],
+  "properties": {
+    "format": { "const": "paralleldoc" },
+    "version": { "const": "3.0" },
+    "metadata": { "$ref": "#/$defs/metadata" },
+    "authors": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/author" }
+    },
+    "units": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/unit" }
+    },
+    "groups": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/group" }
+    },
+    "visuals": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/visual" }
+    },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    },
+    "profiles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/profile" }
+    },
+    "extensions": { "$ref": "#/$defs/extensions" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "uniqueItems": true
+    },
+    "refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/id" },
+      "uniqueItems": true
+    },
+    "kind": {
+      "enum": ["source", "model", "analysis", "action"]
+    },
+    "extensions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9.-]+/[A-Za-z0-9._-]+$"
+      },
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_id",
+        "revision",
+        "title",
+        "author_refs"
+      ],
+      "properties": {
+        "document_id": { "$ref": "#/$defs/id" },
+        "revision": { "$ref": "#/$defs/id" },
+        "title": { "$ref": "#/$defs/text" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "language": { "type": "string" },
+        "author_refs": { "$ref": "#/$defs/refs" },
+        "default_profile_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "name"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["human", "model", "tool", "unknown"] },
+        "name": { "$ref": "#/$defs/text" },
+        "version": { "type": "string" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label"],
+      "properties": {
+        "label": { "$ref": "#/$defs/text" },
+        "locator": { "type": "string" },
+        "source_sha256": { "$ref": "#/$defs/hash" }
+      }
+    },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "title",
+        "text",
+        "text_format",
+        "author_refs",
+        "epistemic",
+        "status",
+        "source_refs",
+        "asset_ids"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "$ref": "#/$defs/kind" },
+        "title": { "$ref": "#/$defs/text" },
+        "text": { "$ref": "#/$defs/text" },
+        "text_format": { "enum": ["plain", "markdown-safe"] },
+        "summary": { "$ref": "#/$defs/text" },
+        "author_refs": { "$ref": "#/$defs/refs" },
+        "epistemic": {
+          "enum": ["reported", "supported", "hypothesis", "unknown", "not-applicable"]
+        },
+        "status": {
+          "enum": ["draft", "reviewed", "blocked", "done"]
+        },
+        "source_refs": { "$ref": "#/$defs/ids" },
+        "asset_ids": { "$ref": "#/$defs/ids" },
+        "supersedes": { "$ref": "#/$defs/ids" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "epistemic": { "const": "supported" } }
+          },
+          "then": {
+            "properties": { "source_refs": { "minItems": 1 } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "kind": { "const": "source" } }
+          },
+          "then": {
+            "required": ["provenance"]
+          }
+        }
+      ]
+    },
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "unit_refs"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "$ref": "#/$defs/text" },
+        "unit_refs": { "$ref": "#/$defs/refs" }
+      }
+    },
+    "visual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "title",
+        "question",
+        "fallback",
+        "owner_unit_id",
+        "author_refs",
+        "nodes",
+        "edges"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "relationship-graph" },
+        "title": { "$ref": "#/$defs/text" },
+        "question": { "$ref": "#/$defs/text" },
+        "fallback": { "$ref": "#/$defs/text" },
+        "owner_unit_id": { "$ref": "#/$defs/id" },
+        "author_refs": { "$ref": "#/$defs/refs" },
+        "nodes": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/node" }
+        },
+        "edges": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/edge" }
+        },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "unit_refs"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "$ref": "#/$defs/text" },
+        "unit_refs": { "$ref": "#/$defs/refs" }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "from", "to", "relation", "label", "unit_refs"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "from": { "$ref": "#/$defs/id" },
+        "to": { "$ref": "#/$defs/id" },
+        "relation": {
+          "enum": [
+            "supports",
+            "qualifies",
+            "contradicts",
+            "depends_on",
+            "precedes",
+            "compares"
+          ]
+        },
+        "label": { "$ref": "#/$defs/text" },
+        "unit_refs": { "$ref": "#/$defs/refs" }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "mime",
+        "sha256",
+        "byte_length",
+        "width",
+        "height",
+        "alt",
+        "caption",
+        "author_refs",
+        "provenance",
+        "locator"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "mime": { "enum": ["image/png", "image/jpeg", "image/webp"] },
+        "sha256": { "$ref": "#/$defs/hash" },
+        "byte_length": { "type": "integer", "minimum": 1 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "alt": { "$ref": "#/$defs/text" },
+        "caption": { "$ref": "#/$defs/text" },
+        "author_refs": { "$ref": "#/$defs/refs" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "locator": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode", "data_uri"],
+              "properties": {
+                "mode": { "const": "embedded" },
+                "data_uri": {
+                  "type": "string",
+                  "pattern": "^data:image/(png|jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}$"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode", "path"],
+              "properties": {
+                "mode": { "const": "relative" },
+                "path": { "$ref": "#/$defs/text" }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode", "url"],
+              "properties": {
+                "mode": { "const": "external" },
+                "url": { "type": "string", "pattern": "^https://" }
+              }
+            }
+          ]
+        },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "density", "panels"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "$ref": "#/$defs/text" },
+        "density": { "enum": ["reading", "dense"] },
+        "panels": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/panel" }
+        }
+      }
+    },
+    "panel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "kinds", "weight"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "$ref": "#/$defs/text" },
+        "kinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/kind" }
+        },
+        "weight": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    }
+  }
+}

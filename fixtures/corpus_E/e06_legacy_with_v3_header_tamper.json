@@ -1,0 +1,31 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "doc-tampered-v21",
+    "revision": "rev-1",
+    "title": "Tampered Legacy Doc",
+    "author_refs": [
+      "auth-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-01",
+      "kind": "human",
+      "name": "Author"
+    }
+  ],
+  "columns": [
+    {
+      "key": "c1",
+      "title": "Col 1"
+    }
+  ],
+  "items": [
+    {
+      "id": "item-1",
+      "c1": "Val"
+    }
+  ]
+}

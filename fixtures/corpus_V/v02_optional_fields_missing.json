@@ -1,0 +1,65 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "v-doc-02-no-optionals",
+    "revision": "rev-1",
+    "title": "Corpus V02 Document Without Optional Fields",
+    "author_refs": [
+      "auth-v-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-v-01",
+      "kind": "tool",
+      "name": "Audit Tool"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-01",
+      "kind": "source",
+      "title": "Contract Clause",
+      "text": "Basic clause without summary or supersedes.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "Contract §1"
+      }
+    },
+    {
+      "id": "u-02",
+      "kind": "action",
+      "title": "Required Action",
+      "text": "Basic action without asset_ids.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "not-applicable",
+      "status": "draft",
+      "source_refs": [],
+      "asset_ids": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-01",
+      "title": "Group 1",
+      "unit_refs": [
+        "u-01",
+        "u-02"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": []
+}

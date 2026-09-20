@@ -1,0 +1,102 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "v-doc-05-unicode-rtl",
+    "revision": "rev-1",
+    "title": "Corpus V05 Многоязычный документ с RTL и Emoji 🏳️‍🌈⚡🛡️",
+    "language": "mul",
+    "author_refs": [
+      "auth-v-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-v-01",
+      "kind": "human",
+      "name": "Global Polyglot 🌍"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-rtl-ar",
+      "kind": "source",
+      "title": "المواصفات الفنية للخدمة السحابية",
+      "text": "تضمن الشركة توفر الخدمة بنسبة 99.95% شهرياً مع استثناء أعمال الصيانة المجدولة مسبقاً.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "العقد رقم 42"
+      }
+    },
+    {
+      "id": "u-rtl-he",
+      "kind": "source",
+      "title": "הסכם רמת שירות (SLA)",
+      "text": "זמינות השירות החודשית לא תפחת מ-99.95%, למעט זמני תחזוקה מתואמים מראש.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "נספח שירות 2"
+      }
+    },
+    {
+      "id": "u-cjk-zh",
+      "kind": "analysis",
+      "title": "高可用性技术评估",
+      "text": "采用多可用区（Multi-AZ）架构设计，历史运行时间达 99.99%。数学公式: $\\sum \\Delta t \\le 21.6\\text{ min}$。",
+      "text_format": "markdown-safe",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "supported",
+      "status": "reviewed",
+      "source_refs": [
+        "u-rtl-ar",
+        "u-rtl-he"
+      ],
+      "asset_ids": []
+    },
+    {
+      "id": "u-emoji-ua",
+      "kind": "action",
+      "title": "Рекомендовані дії 🚀🛡️",
+      "text": "Підтвердити відповідність критеріям SLA та розгорнути моніторинг Prom-SKS в реальному часі!",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "not-applicable",
+      "status": "done",
+      "source_refs": [],
+      "asset_ids": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-multi-01",
+      "title": "Международные спецификации / International Standards",
+      "unit_refs": [
+        "u-rtl-ar",
+        "u-rtl-he",
+        "u-cjk-zh",
+        "u-emoji-ua"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": []
+}

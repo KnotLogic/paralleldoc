@@ -1,0 +1,23 @@
+[
+  {
+    "primary_file": "stress_1000_units.json",
+    "alias_file": "corpus_R_stress_1000.json",
+    "bytes": 5858883,
+    "sha256": "6d3b373b1c8f84347bd07d61f92fcaba843da536d879d884d3a1260cc047b425",
+    "description": "1,000 units, 250 groups, 100n/150e graph, 12 MiB decoded assets"
+  },
+  {
+    "primary_file": "graph_limit_200n_400e.json",
+    "alias_file": "corpus_R_large_graph_200n_400e.json",
+    "bytes": 120583,
+    "sha256": "0834114fbaae204642ff1648eab7d04330c842ecf899898696844b8b0d1a6927",
+    "description": "200 nodes / 400 edges within visual rendering limit"
+  },
+  {
+    "primary_file": "graph_breach_201n_401e.json",
+    "alias_file": "corpus_R_overflow_graph_201n_401e.json",
+    "bytes": 120954,
+    "sha256": "cfd5ca6d0e07f499dc3a3bebe3e59cef755005d2a64e8986409fa0c7a1d5577a",
+    "description": "201 nodes / 401 edges triggering scale limit guard banner and fallback table"
+  }
+]

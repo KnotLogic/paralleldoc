@@ -1,0 +1,8 @@
+{
+  "format": "paralleldoc-integrity-1",
+  "algorithm": "SHA-256",
+  "scope": "raw-bytes",
+  "expected_sha256": "63388ac6b567024504722265aa473ce391996a7abb2b78f9b50d7af4518ff896",
+  "document_id": "v-doc-08-base",
+  "revision": "rev-1"
+}

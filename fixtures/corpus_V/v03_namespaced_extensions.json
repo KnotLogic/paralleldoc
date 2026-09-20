@@ -1,0 +1,70 @@
+{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "v-doc-03-extensions",
+    "revision": "rev-1",
+    "title": "Corpus V03 Namespaced Extensions Document",
+    "author_refs": [
+      "auth-v-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-v-01",
+      "kind": "tool",
+      "name": "Extension Validator"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-ext-01",
+      "kind": "source",
+      "title": "Extension Source Unit",
+      "text": "Clause with namespaced extension data.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "Ext Ref"
+      },
+      "extensions": {
+        "astrai.org/compliance-grade": {
+          "grade": "A+",
+          "score": 98.5
+        }
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-ext-01",
+      "title": "Extension Group",
+      "unit_refs": [
+        "u-ext-01"
+      ]
+    }
+  ],
+  "visuals": [],
+  "assets": [],
+  "profiles": [],
+  "extensions": {
+    "astrai.org/audit-trail": {
+      "auditor": "Teamwork M5 Worker",
+      "verified": true,
+      "check_ids": [
+        101,
+        102,
+        103
+      ]
+    },
+    "custom-vendor.com/v3-telemetry": {
+      "session_id": "sess-9912"
+    }
+  }
+}

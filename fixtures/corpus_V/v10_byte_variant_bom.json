@@ -1,0 +1,140 @@
+﻿{
+  "format": "paralleldoc",
+  "version": "3.0",
+  "metadata": {
+    "document_id": "v-doc-08-base",
+    "revision": "rev-1",
+    "title": "Corpus V08 Canonical Byte Variant Document",
+    "created_at": "2026-09-06T18:00:00Z",
+    "language": "ru",
+    "author_refs": [
+      "auth-v-01"
+    ]
+  },
+  "authors": [
+    {
+      "id": "auth-v-01",
+      "kind": "human",
+      "name": "Corpus V Lead Evaluator"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-v08-01",
+      "kind": "source",
+      "title": "Baseline SLA Clause",
+      "text": "Уровень доступности сервиса составляет 99.95% в месяц, без учета плановых работ.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "reported",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": [],
+      "provenance": {
+        "label": "SLA Specification Section 1.1"
+      }
+    },
+    {
+      "id": "u-v08-02",
+      "kind": "model",
+      "title": "High Availability Topology",
+      "text": "Двухузловая архитектура с автоматическим переключением отказоустойчивости.",
+      "text_format": "markdown-safe",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "hypothesis",
+      "status": "reviewed",
+      "source_refs": [],
+      "asset_ids": []
+    },
+    {
+      "id": "u-v08-03",
+      "kind": "analysis",
+      "title": "Downtime Margin Analysis",
+      "text": "Допустимый суммарный простой составляет не более 21.6 минут в месяц.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "supported",
+      "status": "reviewed",
+      "source_refs": [
+        "u-v08-01"
+      ],
+      "asset_ids": []
+    },
+    {
+      "id": "u-v08-04",
+      "kind": "action",
+      "title": "Monitoring Threshold Alert",
+      "text": "Настройка алерта на порог 15 минут времени недоступности.",
+      "text_format": "plain",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "epistemic": "not-applicable",
+      "status": "draft",
+      "source_refs": [],
+      "asset_ids": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-v08-01",
+      "title": "SLA Core Evaluation Group",
+      "unit_refs": [
+        "u-v08-01",
+        "u-v08-02",
+        "u-v08-03",
+        "u-v08-04"
+      ]
+    }
+  ],
+  "visuals": [
+    {
+      "id": "vis-v08-01",
+      "type": "relationship-graph",
+      "title": "SLA Verification Logic",
+      "question": "Обеспечивает ли Multi-AZ заданный уровень 99.95%?",
+      "fallback": "Таблица взаимосвязей требований SLA и архитектуры.",
+      "owner_unit_id": "u-v08-02",
+      "author_refs": [
+        "auth-v-01"
+      ],
+      "nodes": [
+        {
+          "id": "node-01",
+          "label": "Clause 1.1",
+          "unit_refs": [
+            "u-v08-01"
+          ]
+        },
+        {
+          "id": "node-02",
+          "label": "Downtime Calc",
+          "unit_refs": [
+            "u-v08-03"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "edge-01",
+          "from": "node-01",
+          "to": "node-02",
+          "relation": "supports",
+          "label": "Calculated from specification",
+          "unit_refs": [
+            "u-v08-01",
+            "u-v08-03"
+          ]
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "profiles": []
+}
